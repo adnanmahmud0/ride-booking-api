@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "D:\\ADNAN\\development\\ride-booking-api\\winston\\error\\.8f5200353b14f5de6fe74357b34b33c8c792c64a-audit.json",
+    "files": [
+        {
+            "date": 1753904605060,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\error\\31-07-2025-01-error.log",
+            "hash": "8a8c46c58d3f4489caf99d14093b42c705d60ab88a952a3667ec620369820459"
+        }
+    ],
+    "hashType": "sha256"
+}
