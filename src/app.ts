@@ -1,9 +1,10 @@
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import globalErrorHandler from './app/middlewares/globalErrorHandler';
+
 import router from './routes';
 import { Morgan } from './shared/morgen';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 const app = express();
 
 //morgan
