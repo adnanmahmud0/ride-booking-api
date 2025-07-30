@@ -4,8 +4,8 @@ import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import handleValidationError from '../../errors/handleValidationError';
 import handleZodError from '../../errors/handleZodError';
-import { errorLogger } from '../../shared/logger';
 import { IErrorMessage } from '../../types/errors.types';
+import { errorLogger } from '../../shared/looger';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   config.node_env === 'development'
