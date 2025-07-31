@@ -1,0 +1,67 @@
+Fri Aug 01 2025 0:6:59 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 439.268 ms
+Fri Aug 01 2025 0:8:29 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 336.901 ms
+Fri Aug 01 2025 0:9:52 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:10:53 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:11:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:11:59 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:12:8 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:13:15 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:13:16 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:13:27 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:13:28 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:13:34 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:13:34 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:14:29 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 296.792 ms
+Fri Aug 01 2025 0:14:34 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:25:17 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:25:18 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:28:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:28:12 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:28:35 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 392.126 ms
+Fri Aug 01 2025 0:28:41 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:34:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:34:46 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:34:48 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:34:49 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:35:13 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:14 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:35:16 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:17 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:35:43 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:44 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:35:48 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:50 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:51 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:35:56 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:35:57 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:36:16 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 425.062 ms
+Fri Aug 01 2025 0:36:21 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:39:25 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:39:27 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:39:34 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:39:35 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:39:49 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:39:50 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:40:10 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 377.155 ms
+Fri Aug 01 2025 0:40:16 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:42:0 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:42:1 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:42:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:42:13 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:42:49 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:42:50 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:42:52 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:42:54 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:42:55 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:43:11 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 390.012 ms
+Fri Aug 01 2025 0:43:16 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:44:3 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:44:4 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:44:21 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 388.033 ms
+Fri Aug 01 2025 0:44:27 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:46:23 [SERVER-NAME] info: ::1 - POST /api/v1/auth/verify-email 200 - 221.933 ms
+Fri Aug 01 2025 0:51:41 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 0:51:42 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Fri Aug 01 2025 0:52:6 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 342.721 ms
+Fri Aug 01 2025 0:52:11 [SERVER-NAME] info: Mail send successfully
+Fri Aug 01 2025 0:52:52 [SERVER-NAME] info: ::1 - POST /api/v1/auth/verify-email 200 - 193.794 ms

@@ -29,6 +29,16 @@
             "date": 1753918260823,
             "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\error\\31-07-2025-05-error.log",
             "hash": "5db239cab03e83ac1a61689f851e4d3e85ccb9a0c56ce327e26a6d6ce49e78a2"
+        },
+        {
+            "date": 1753984429538,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\error\\31-07-2025-23-error.log",
+            "hash": "1b76be98e50b83fcd6cccdc541d89215a50b11224b9d796c589bf753fea96bc5"
+        },
+        {
+            "date": 1753985230425,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\error\\01-08-2025-00-error.log",
+            "hash": "03fed27d2841fed452d865a54406f9f65d12c24513701eb002b3071a05a87c39"
         }
     ],
     "hashType": "sha256"

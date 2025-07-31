@@ -1,0 +1,3 @@
+Thu Jul 31 2025 5:31:8 [SERVER-NAME] error: Email getaddrinfo ENOTFOUND smtp.example.com
+Thu Jul 31 2025 5:54:45 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 124.411 ms
+Thu Jul 31 2025 5:55:28 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 86.253 ms

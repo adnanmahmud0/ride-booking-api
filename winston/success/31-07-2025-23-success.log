@@ -1,0 +1,4 @@
+Thu Jul 31 2025 23:53:49 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Thu Jul 31 2025 23:53:50 [SERVER-NAME] info: [33m♻️  Application listening on port:9999[39m
+Thu Jul 31 2025 23:54:2 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 410.717 ms
+Thu Jul 31 2025 23:55:58 [SERVER-NAME] info: ::1 - POST /api/v1/user/register 200 - 346.455 ms

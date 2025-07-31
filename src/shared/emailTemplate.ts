@@ -1,19 +1,31 @@
 import { ICreateAccount, IResetPassword } from '../types/emailTamplate';
 
+const commonStyle = {
+  background: 'linear-gradient(#2b2b2b, #1f1f1f)',
+  cardBg: '#2b2b2b',
+  text: '#f5f5f5',
+  secondaryText: '#cccccc',
+  accent: '#00bfbf',
+  logoDark: 'https://i.ibb.co/k2tNpGbB/ridebooking-dark.png',
+};
+
 const createAccount = (values: ICreateAccount) => {
   const data = {
     to: values.email,
-    subject: 'Verify your account',
-    html: `<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 50px; padding: 20px; color: #555;">
-    <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <img src="https://i.postimg.cc/6pgNvKhD/logo.png" alt="Logo" style="display: block; margin: 0 auto 20px; width:150px" />
-          <h2 style="color: #277E16; font-size: 24px; margin-bottom: 20px;">Hey! ${values.name}, Your Toothlens Account Credentials</h2>
-        <div style="text-align: center;">
-            <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Your single use code is:</p>
-            <div style="background-color: #277E16; width: 80px; padding: 10px; text-align: center; border-radius: 8px; color: #fff; font-size: 25px; letter-spacing: 2px; margin: 20px auto;">${values.otp}</div>
-            <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">This code is valid for 3 minutes.</p>
-        </div>
+    subject: 'Verify Your RideBooking Account',
+    html: `
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: ${commonStyle.background}; color: ${commonStyle.text};">
+  <div style="max-width: 600px; margin: 40px auto; background-color: ${commonStyle.cardBg}; border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.4);">
+    <div style="padding: 20px; text-align: center;">
+      <img src="${commonStyle.logoDark}" alt="RideBooking Logo" style="width: 120px; margin-bottom: 20px;" />
+      <h2 style="font-size: 22px; margin-bottom: 10px;">Hey ${values.name},</h2>
+      <p style="font-size: 16px; color: ${commonStyle.secondaryText}; margin-bottom: 20px;">Welcome to <strong style="color: ${commonStyle.accent};">RideBooking</strong>! Use the code below to verify your account.</p>
+      <div style="background-color: ${commonStyle.accent}; color: #ffffff; font-size: 24px; letter-spacing: 3px; padding: 12px 24px; border-radius: 6px; display: inline-block; margin: 20px 0;">
+        ${values.otp}
+      </div>
+      <p style="font-size: 14px; color: ${commonStyle.secondaryText};">This code is valid for <strong>3 minutes</strong>.</p>
     </div>
+  </div>
 </body>`,
   };
   return data;
@@ -22,17 +34,23 @@ const createAccount = (values: ICreateAccount) => {
 const resetPassword = (values: IResetPassword) => {
   const data = {
     to: values.email,
-    subject: 'Reset your password',
-    html: `<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 50px; padding: 20px; color: #555;">
-    <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <img src="https://i.postimg.cc/6pgNvKhD/logo.png" alt="Logo" style="display: block; margin: 0 auto 20px; width:150px" />
-        <div style="text-align: center;">
-            <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">Your single use code is:</p>
-            <div style="background-color: #277E16; width: 80px; padding: 10px; text-align: center; border-radius: 8px; color: #fff; font-size: 25px; letter-spacing: 2px; margin: 20px auto;">${values.otp}</div>
-            <p style="color: #555; font-size: 16px; line-height: 1.5; margin-bottom: 20px;">This code is valid for 3 minutes.</p>
-                <p style="color: #b9b4b4; font-size: 16px; line-height: 1.5; margin-bottom: 20px;text-align:left">If you didn't request this code, you can safely ignore this email. Someone else might have typed your email address by mistake.</p>
-        </div>
+    subject: 'Reset Your RideBooking Password',
+    html: `
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: ${commonStyle.background}; color: ${commonStyle.text};">
+  <div style="max-width: 600px; margin: 40px auto; background-color: ${commonStyle.cardBg}; border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.4);">
+    <div style="padding: 20px; text-align: center;">
+      <img src="${commonStyle.logoDark}" alt="RideBooking Logo" style="width: 120px; margin-bottom: 20px;" />
+      <h2 style="font-size: 22px; margin-bottom: 10px;">Reset Your Password</h2>
+      <p style="font-size: 16px; color: ${commonStyle.secondaryText}; margin-bottom: 20px;">Use the code below to reset your <strong style="color: ${commonStyle.accent};">RideBooking</strong> account password.</p>
+      <div style="background-color: ${commonStyle.accent}; color: #ffffff; font-size: 24px; letter-spacing: 3px; padding: 12px 24px; border-radius: 6px; display: inline-block; margin: 20px 0;">
+        ${values.otp}
+      </div>
+      <p style="font-size: 14px; color: ${commonStyle.secondaryText};">This code is valid for <strong>3 minutes</strong>.</p>
+      <p style="font-size: 13px; color: #999999; text-align: left; margin-top: 20px;">
+        If you did not request a password reset, you can safely ignore this email.
+      </p>
     </div>
+  </div>
 </body>`,
   };
   return data;
