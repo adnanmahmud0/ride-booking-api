@@ -1,4 +1,0 @@
-Thu Jul 31 2025 2:1:4 [SERVER-NAME] error: ::1 - POST /api/v1/user/register 400 - 9.522 ms
-Thu Jul 31 2025 2:3:33 [SERVER-NAME] error: ::1 - POST /api/v1/user/register 400 - 15.800 ms
-Thu Jul 31 2025 2:3:55 [SERVER-NAME] error: Email getaddrinfo ENOTFOUND smtp.example.com
-Thu Jul 31 2025 2:6:58 [SERVER-NAME] error: Email getaddrinfo ENOTFOUND smtp.example.com

@@ -7,24 +7,35 @@ import { RiderValidation } from './rider.validation';
 
 const router = express.Router();
 
-router.post(
-  '/rides/request',
-  auth(USER_ROLES.rider),
-  validateRequest(RiderValidation.requestRideZodSchema),
-  RiderController.requestRide
-);
-
-router.patch(
-  '/rides/:rideId/cancel',
-  auth(USER_ROLES.rider),
-  validateRequest(RiderValidation.cancelRideZodSchema),
-  RiderController.cancelRide
+router.get('/available-drivers',
+    auth(USER_ROLES.rider),
+    RiderController.getAvailableDrivers
 );
 
 router.get(
-  '/rides/history',
+  '/driver/:driverId',
   auth(USER_ROLES.rider),
-  RiderController.getRideHistory
+  RiderController.getDriverProfile
+);
+
+router.post(
+    '/rides/request',
+    auth(USER_ROLES.rider),
+    validateRequest(RiderValidation.requestRideZodSchema),
+    RiderController.requestRide
+);
+
+router.patch(
+    '/rides/:rideId/cancel',
+    auth(USER_ROLES.rider),
+    validateRequest(RiderValidation.cancelRideZodSchema),
+    RiderController.cancelRide
+);
+
+router.get(
+    '/rides/history',
+    auth(USER_ROLES.rider),
+    RiderController.getRideHistory
 );
 
 export const RiderRoutes = router;

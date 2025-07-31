@@ -20,3 +20,7 @@ Fri Aug 01 2025 1:31:6 [SERVER-NAME] error: ::1 - POST /api/v1/auth/reset-passwo
 Fri Aug 01 2025 1:31:29 [SERVER-NAME] error: ::1 - POST /api/v1/auth/reset-password 401 - 116.195 ms
 Fri Aug 01 2025 1:31:39 [SERVER-NAME] error: ::1 - POST /api/v1/auth/reset-password 400 - 1.890 ms
 Fri Aug 01 2025 1:31:52 [SERVER-NAME] error: ::1 - POST /api/v1/auth/reset-password 400 - 4.799 ms
+Fri Aug 01 2025 1:57:0 [SERVER-NAME] error: ::1 - POST /api/v1/auth/change-password 401 - 12.793 ms
+Fri Aug 01 2025 1:57:39 [SERVER-NAME] error: ::1 - POST /api/v1/auth/change-password 401 - 1.459 ms
+Fri Aug 01 2025 1:59:33 [SERVER-NAME] error: ::1 - POST /api/v1/auth/change-password 401 - 1.460 ms
+Fri Aug 01 2025 1:59:47 [SERVER-NAME] error: ::1 - POST /api/v1/auth/change-password 401 - 1.750 ms

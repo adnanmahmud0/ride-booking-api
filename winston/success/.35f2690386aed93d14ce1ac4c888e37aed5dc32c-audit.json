@@ -6,21 +6,6 @@
     "auditLog": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\.35f2690386aed93d14ce1ac4c888e37aed5dc32c-audit.json",
     "files": [
         {
-            "date": 1753904605053,
-            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\31-07-2025-01-success.log",
-            "hash": "c7365599920fd2e47365e3e7198f0ca6a0aa485751c08559d94459b6c0a12527"
-        },
-        {
-            "date": 1753905834993,
-            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\31-07-2025-02-success.log",
-            "hash": "71a296f394eea1dcb53b63c9aa7ced1403e0287b4dc09c4454470235f2c6eb9e"
-        },
-        {
-            "date": 1753910427688,
-            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\31-07-2025-03-success.log",
-            "hash": "98e03ddb4c84c373e7198210647afb237dbbc4dc613a4835dd868f35397ff8da"
-        },
-        {
             "date": 1753913482323,
             "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\31-07-2025-04-success.log",
             "hash": "e9382b8ee6dbf5e5c24adccbf3994aa4ebfbd83d623804111acd7224c94a94bc"
@@ -44,6 +29,21 @@
             "date": 1753988423609,
             "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-01-success.log",
             "hash": "18c5d29517efac2db99e75ffba124032856bd8cdf3a75a8e3240e830bc0f9ece"
+        },
+        {
+            "date": 1753994808487,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-02-success.log",
+            "hash": "378cb57e64b55df318e7ae0800bc10fc241b278b873f3d5cbbcf907742dcdb49"
+        },
+        {
+            "date": 1753995828452,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-03-success.log",
+            "hash": "03ec987b4132a82535532b35cf707ee5846fee6295db4ae5c12799726e16f656"
+        },
+        {
+            "date": 1753999235001,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-04-success.log",
+            "hash": "f059b7aba05d5c08e94dbe9fb6d08710739a6f3314bda77341557a645f88f80f"
         }
     ],
     "hashType": "sha256"
