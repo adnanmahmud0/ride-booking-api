@@ -1,0 +1,5 @@
+Thu Jul 31 2025 4:11:22 [SERVER-NAME] error: Email getaddrinfo ENOTFOUND smtp.example.com
+Thu Jul 31 2025 4:34:12 [SERVER-NAME] error: ::1 - GET /api/v1/user/profile 401 - 30.156 ms
+Thu Jul 31 2025 4:36:13 [SERVER-NAME] error: ::1 - GET /api/v1/user/profile 401 - 49.995 ms
+Thu Jul 31 2025 4:39:32 [SERVER-NAME] error: Email getaddrinfo ENOTFOUND smtp.example.com
+Thu Jul 31 2025 4:40:1 [SERVER-NAME] error: ::1 - POST /api/v1/auth/login 400 - 94.321 ms

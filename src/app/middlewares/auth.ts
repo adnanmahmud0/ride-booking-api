@@ -23,6 +23,9 @@ const auth =
           config.jwt.jwt_secret as Secret
         );
         //set user to header
+        if (!verifyUser) {
+          throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid token');
+        }
         req.user = verifyUser;
 
         //guard user
