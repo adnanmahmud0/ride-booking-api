@@ -39,6 +39,11 @@
             "date": 1753985219201,
             "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-00-success.log",
             "hash": "91189d166cfa5e80c1f7afce5a76994a72c37ff223ff80aef257bf81ec9ef63e"
+        },
+        {
+            "date": 1753988423609,
+            "name": "D:\\ADNAN\\development\\ride-booking-api\\winston\\success\\01-08-2025-01-success.log",
+            "hash": "18c5d29517efac2db99e75ffba124032856bd8cdf3a75a8e3240e830bc0f9ece"
         }
     ],
     "hashType": "sha256"
