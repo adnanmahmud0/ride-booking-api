@@ -1,0 +1,7 @@
+Fri Aug 01 2025 19:17:26 [SERVER-NAME] error: ::1 - GET /api/v1/driver/create-profile 404 - 25.930 ms
+Fri Aug 01 2025 19:21:4 [SERVER-NAME] error: ::1 - GET /api/v1/driver/set-availability 404 - 1.359 ms
+Fri Aug 01 2025 19:21:51 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/set-availability 400 - 21.313 ms
+Fri Aug 01 2025 19:26:28 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/688cbe7b1ab087904f43cb28 403 - 3.485 ms
+Fri Aug 01 2025 19:26:48 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/688cbe7b1ab087904f43cb28 403 - 2.776 ms
+Fri Aug 01 2025 19:27:20 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/688cbe7b1ab087904f43cb28 403 - 2.539 ms
+Fri Aug 01 2025 19:29:0 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/688cbe7b1ab087904f43cb28 403 - 2.029 ms

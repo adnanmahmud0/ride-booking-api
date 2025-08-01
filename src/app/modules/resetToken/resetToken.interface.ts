@@ -1,3 +1,5 @@
+// resetToken.interface.ts
+
 import { Model, Types } from 'mongoose';
 
 export type IResetToken = {

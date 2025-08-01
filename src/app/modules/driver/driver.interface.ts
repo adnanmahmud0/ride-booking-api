@@ -1,12 +1,21 @@
-import { Model, Types } from 'mongoose';
-import { IUser } from '../user/user.interface';
+import { Types } from 'mongoose';
 
-export type IDriver = IUser & {
-  approvalStatus: 'pending' | 'approved' | 'suspended';
-  availability: 'online' | 'offline';
-  vehicleInfo: { type: string; plate: string } | null;
+export type ICar = {
+  model: string;
+  licensePlate: string;
+  color: string;
+  year: number;
 };
 
-export type DriverModal = {
-  isDriverApproved(id: string): Promise<boolean>;
-} & Model<IDriver>;
+export type IDriverInfo = {
+  licenseNumber: string;
+  experienceYears: number;
+};
+
+export type IDriver = {
+  user: Types.ObjectId;
+  isApproved: boolean;
+  availability: 'online' | 'offline';
+  car: ICar;
+  driverInfo: IDriverInfo;
+};

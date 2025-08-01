@@ -1,80 +1,125 @@
 import { StatusCodes } from 'http-status-codes';
+import { JwtPayload } from 'jsonwebtoken';
+import { Server } from 'socket.io';
 import ApiError from '../../../errors/ApiError';
-import { IRide } from '../rider/rider.interface';
-import { Ride } from '../rider/rider.model';
-import { IDriver } from './driver.interface';
+
+import { ICar, IDriverInfo } from './driver.interface';
 import { Driver } from './driver.model';
+import { Ride } from '../rider/rider.model';
 
-const acceptRejectRide = async (driverId: string, payload: { rideId: string; action: 'accept' | 'reject' }): Promise<IRide | null> => {
-    const ride = await Ride.findById(payload.rideId);
-    if (!ride) {
-        throw new ApiError(StatusCodes.NOT_FOUND, 'Ride not found');
-    }
-    if (ride.status !== 'requested') {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride is no longer available for acceptance');
-    }
-    if (ride.driver) {
-        throw new ApiError(StatusCodes.CONFLICT, 'Ride has already been accepted');
-    }
+// Declare global io (set in server.ts)
+declare global {
+  var io: Server;
+}
 
-    const driver = await Driver.findById(driverId);
-    if (!driver || (driver as unknown as IDriver).approvalStatus !== 'approved') {
-        throw new ApiError(StatusCodes.FORBIDDEN, 'Driver not approved');
-    }
+// Create driver profile
+const createDriverProfile = async (user: JwtPayload, payload: { car: ICar; driverInfo: IDriverInfo }) => {
+  const existingDriver = await Driver.findOne({ user: user.id });
+  if (existingDriver) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Driver profile already exists');
+  }
 
-    if (payload.action === 'accept') {
-        const result = await Ride.findByIdAndUpdate(
-            payload.rideId,
-            { driver: driverId, status: 'accepted', updatedAt: new Date() },
-            { new: true }
-        );
-        return result;
-    } else {
-        return ride; // No update for reject, just return the ride
-    }
+  const driver = await Driver.create({
+    user: user.id,
+    car: payload.car,
+    driverInfo: payload.driverInfo,
+    isApproved: false,
+    availability: 'offline',
+  });
+
+  return driver;
 };
 
-const updateRideStatus = async (driverId: string, payload: { rideId: string; status: 'picked_up' | 'in_transit' | 'completed' }): Promise<IRide | null> => {
-    const ride = await Ride.findById(payload.rideId);
-    if (!ride) {
-        throw new ApiError(StatusCodes.NOT_FOUND, 'Ride not found');
-    }
-    if (ride.driver?.toString() !== driverId) {
-        throw new ApiError(StatusCodes.FORBIDDEN, 'Unauthorized to update this ride');
-    }
-    if (!['picked_up', 'in_transit', 'completed'].includes(payload.status) || payload.status <= ride.status) {
-        throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid status transition');
-    }
+// Update driver profile
+const updateDriverProfile = async (user: JwtPayload, payload: { car?: Partial<ICar>; driverInfo?: Partial<IDriverInfo> }) => {
+  const driver = await Driver.findOne({ user: user.id });
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
 
-    const result = await Ride.findByIdAndUpdate(
-        payload.rideId,
-        { status: payload.status, updatedAt: new Date() },
-        { new: true }
-    );
-    return result;
+  if (payload.car) {
+    driver.car = { ...driver.car, ...payload.car };
+  }
+  if (payload.driverInfo) {
+    driver.driverInfo = { ...driver.driverInfo, ...payload.driverInfo };
+  }
+
+  await driver.save();
+  return driver;
 };
 
-const setAvailability = async (driverId: string, payload: { availability: 'online' | 'offline' }): Promise<IDriver | null> => {
-    const result = await Driver.findByIdAndUpdate(
-        driverId,
-        { availability: payload.availability },
-        { new: true }
-    );
-    if (!result) {
-        throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
-    }
-    return result.toObject() as unknown as IDriver;
+// Set driver availability
+const setAvailability = async (user: JwtPayload, payload: { availability: 'online' | 'offline' }) => {
+  const driver = await Driver.findOne({ user: user.id });
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
+
+  driver.availability = payload.availability;
+  await driver.save();
+
+  // Emit availability update to Socket.IO
+  global.io.emit('updateAvailability', {
+    userId: user.id,
+    availability: payload.availability,
+  });
+
+  return driver;
 };
 
-const getEarningsHistory = async (driverId: string): Promise<{ totalEarnings: number; rides: IRide[] }> => {
-    const rides = await Ride.find({ driver: driverId, status: 'completed' });
-    const totalEarnings = rides.length * 10; // Simple earnings logic (e.g., $10 per ride)
-    return { totalEarnings, rides };
+// Get driver profile
+const getMyDriverProfile = async (user: JwtPayload) => {
+  const driver = await Driver.findOne({ user: user.id }).populate('user');
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
+  return driver;
+};
+
+// Get driver earnings
+const getEarnings = async (user: JwtPayload) => {
+  const driver = await Driver.findOne({ user: user.id });
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
+
+  const rides = await Ride.find({ driver: user.id, status: 'completed' });
+  const totalEarnings = rides.reduce((sum, ride) => sum + (ride.fare || 0), 0);
+
+  return { totalEarnings, rides };
+};
+
+// Approve driver (admin)
+const approveDriver = async (driverId: string) => {
+  const driver = await Driver.findById(driverId);
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
+  }
+
+  driver.isApproved = true;
+  await driver.save();
+  return driver;
+};
+
+// Suspend driver (admin)
+const suspendDriver = async (driverId: string) => {
+  const driver = await Driver.findById(driverId);
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
+  }
+
+  driver.isApproved = false;
+  driver.availability = 'offline';
+  await driver.save();
+  return driver;
 };
 
 export const DriverService = {
-    acceptRejectRide,
-    updateRideStatus,
-    setAvailability,
-    getEarningsHistory,
+  createDriverProfile,
+  updateDriverProfile,
+  setAvailability,
+  getMyDriverProfile,
+  getEarnings,
+  approveDriver,
+  suspendDriver,
 };

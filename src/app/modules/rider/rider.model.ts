@@ -1,36 +1,37 @@
-import { Schema, model } from 'mongoose';
-import { IRide, RideModal } from './rider.interface';
+import { Schema, model, Types } from 'mongoose';
+import { IRide, IRideStatus } from './rider.interface';
 
-const rideSchema = new Schema<IRide, RideModal>(
-  {
-    rider: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    driver: { type: Schema.Types.ObjectId, ref: 'User', default: null },
-    pickupLocation: {
-      type: { type: String, default: 'Point' },
-      coordinates: { type: [Number], required: true },
-    },
-    destinationLocation: {
-      type: { type: String, default: 'Point' },
-      coordinates: { type: [Number], required: true },
-    },
-    status: {
-      type: String,
-      enum: ['requested', 'accepted', 'picked_up', 'in_transit', 'completed', 'canceled'],
-      default: 'requested',
-    },
-    cancelReason: { type: String, default: null },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+const RideSchema = new Schema<IRide>({
+  _id: { type: String, required: true },
+  rider: { type: String, required: true },
+  driver: { type: String },
+  pickupAddress: { type: String, required: true },
+  destinationAddress: { type: String, required: true },
+  pickupLocation: {
+    type: { type: String, enum: ['Point'], default: 'Point', required: true },
+    coordinates: { type: [Number], required: true }, // [longitude, latitude]
   },
-  { timestamps: true }
-);
+  destinationLocation: {
+    type: { type: String, enum: ['Point'], default: 'Point', required: true },
+    coordinates: { type: [Number], required: true }, // [longitude, latitude]
+  },
+  fare: { type: Number },
+  status: {
+    type: String,
+    enum: ['requested', 'accepted', 'picked_up', 'in_transit', 'completed', 'cancelled'],
+    default: 'requested',
+  },
+  timestamps: {
+    requestedAt: { type: Date },
+    acceptedAt: { type: Date },
+    pickedUpAt: { type: Date },
+    inTransitAt: { type: Date },
+    completedAt: { type: Date },
+    cancelledAt: { type: Date },
+  },
+});
 
-// Create geospatial index for location-based queries
-rideSchema.index({ pickupLocation: '2dsphere' });
+// Add geospatial index for proximity queries
+RideSchema.index({ pickupLocation: '2dsphere', destinationLocation: '2dsphere' });
 
-// Add static method
-rideSchema.statics.isRideExist = async function (id: string): Promise<IRide | null> {
-  return await Ride.findById(id);
-};
-
-export const Ride = model<IRide, RideModal>('Ride', rideSchema);
+export const Ride = model<IRide>('Ride', RideSchema);

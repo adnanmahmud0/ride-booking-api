@@ -1,0 +1,23 @@
+Fri Aug 01 2025 19:13:12 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 19:13:13 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 19:13:16 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 19:13:17 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 19:13:28 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 19:13:29 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 19:13:40 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 19:13:41 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 19:15:1 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 19:15:2 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 19:17:47 [SERVER-NAME] info: ::1 - POST /api/v1/driver/create-profile 201 - 152.208 ms
+Fri Aug 01 2025 19:18:30 [SERVER-NAME] info: ::1 - GET /api/v1/driver/me 200 - 124.767 ms
+Fri Aug 01 2025 19:21:21 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/set-availability 200 - 178.386 ms
+Fri Aug 01 2025 19:22:30 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/set-availability 200 - 113.688 ms
+Fri Aug 01 2025 19:22:35 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/set-availability 200 - 109.597 ms
+Fri Aug 01 2025 19:23:32 [SERVER-NAME] info: ::1 - GET /api/v1/driver/earnings 200 - 63.590 ms
+Fri Aug 01 2025 19:25:36 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 110.170 ms
+Fri Aug 01 2025 19:27:2 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 179.820 ms
+Fri Aug 01 2025 19:29:6 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 103.166 ms
+Fri Aug 01 2025 19:29:21 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/approve/688cbe7b1ab087904f43cb28 200 - 101.267 ms
+Fri Aug 01 2025 19:31:27 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/suspend/688cbe7b1ab087904f43cb28 200 - 124.994 ms
+Fri Aug 01 2025 19:33:0 [SERVER-NAME] info: ::1 - GET /api/v1/user/profile - - - ms
+Fri Aug 01 2025 19:33:40 [SERVER-NAME] info: ::1 - GET /api/v1/user/profile 200 - 49.842 ms

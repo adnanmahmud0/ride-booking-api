@@ -1,0 +1,6 @@
+Fri Aug 01 2025 14:0:54 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 400 - 4.335 ms
+Fri Aug 01 2025 14:1:11 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 125.515 ms
+Fri Aug 01 2025 14:15:53 [SERVER-NAME] error: ::1 - POST /api/v1/rider/cancel/688c758ab86de14a1a0aa6bf 404 - 0.986 ms
+Fri Aug 01 2025 14:28:0 [SERVER-NAME] error: ::1 - PATCH /api/v1/rider/accept-reject 403 - 9.047 ms
+Fri Aug 01 2025 14:28:36 [SERVER-NAME] error: ::1 - POST /api/v1/auth/login 400 - 118.272 ms
+Fri Aug 01 2025 14:33:0 [SERVER-NAME] error: ::1 - PATCH /api/v1/rider/accept-reject 400 - 104.210 ms

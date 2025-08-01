@@ -1,0 +1,70 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\.7bb3f5aeef522e0975824ac79b5e8648867034ec-audit.json",
+    "files": [
+        {
+            "date": 1754027840305,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-11-error.log",
+            "hash": "783f4997dd8cc78223496875d1074d85f275480bb64a517b4073ad1920620918"
+        },
+        {
+            "date": 1754028032856,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-12-error.log",
+            "hash": "2bb80798bde63f7914572c1a765dede301a17c091c27346b2872493e537e6034"
+        },
+        {
+            "date": 1754031636436,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-13-error.log",
+            "hash": "50d3e3f87ddf10ea2b2e2fd7e320d43e700cc3aae26be7143f9f35a1bc6895c5"
+        },
+        {
+            "date": 1754035254520,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-14-error.log",
+            "hash": "d630a61f3908f2634603b6d57b5ef5ff72f9e286e81569243cd234b0acb66d66"
+        },
+        {
+            "date": 1754051965100,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-18-error.log",
+            "hash": "704c4a3038e9be7dab2257ebb2c3dcd8302540e0a42c7c4c1435d89e47b83512"
+        },
+        {
+            "date": 1754053990044,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-19-error.log",
+            "hash": "6c5b53140e1da807c3fb6f46a593e2428d685f0751c418f511b9801ccb09a39b"
+        },
+        {
+            "date": 1754059187475,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-20-error.log",
+            "hash": "2a5737b12608446a2b29020f643e74a1b01ffdc9fe2cbd06740eab21c2dba831"
+        },
+        {
+            "date": 1754061267760,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-21-error.log",
+            "hash": "a47a21602f5c610baa310a7cf40921535f26c6227dcde346e0fa7b68a485a4ae"
+        },
+        {
+            "date": 1754069933406,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\01-08-2025-23-error.log",
+            "hash": "1f747df69c58415ef39becdafb338e4c6cc6fbf73b0fa9232ad04dd5025ef048"
+        },
+        {
+            "date": 1754071716247,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\02-08-2025-00-error.log",
+            "hash": "22fc8b45e3a3ecaa8069c021fa449acd4a02884f3b8145e890e2d07d75495154"
+        },
+        {
+            "date": 1754076690100,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\02-08-2025-01-error.log",
+            "hash": "c295460c93ddce59eae393c399c3e78cab9213040ee2791507e0faa04fd4a416"
+        },
+        {
+            "date": 1754078483615,
+            "name": "C:\\developemnt\\Programing-hero-l2\\ride-booking-api\\winston\\error\\02-08-2025-02-error.log",
+            "hash": "c71a8f94c118263813186fa9b11feab334f8732ee214eb2fa4ab92d96bd93575"
+        }
+    ],
+    "hashType": "sha256"
+}

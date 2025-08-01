@@ -30,4 +30,19 @@ router
     UserController.createUser
   );
 
+router
+  .route('/update-user')
+  .patch(
+    auth(USER_ROLES.super_admin, USER_ROLES.admin, USER_ROLES.driver, USER_ROLES.rider),
+    fileUploadHandler(),
+    (req: Request, res: Response, next: NextFunction) => {
+      if (req.body.data) {
+        req.body = UserValidation.updateUserZodSchema.parse(
+          JSON.parse(req.body.data)
+        );
+      }
+      return UserController.updateUser(req, res, next);
+    }
+  );
+
 export const UserRoutes = router;

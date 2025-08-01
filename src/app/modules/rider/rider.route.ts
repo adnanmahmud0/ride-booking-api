@@ -1,41 +1,39 @@
 import express from 'express';
-import { USER_ROLES } from '../../../enums/user';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
-import { RiderController } from './rider.controller';
-import { RiderValidation } from './rider.validation';
+import { USER_ROLES } from '../../../enums/user';
+import { RideController } from './rider.controller';
+import { RideValidation } from './rider.validation';
 
 const router = express.Router();
 
-router.get('/available-drivers',
-    auth(USER_ROLES.rider),
-    RiderController.getAvailableDrivers
-);
-
-router.get(
-  '/driver/:driverId',
-  auth(USER_ROLES.rider),
-  RiderController.getDriverProfile
-);
-
 router.post(
-    '/rides/request',
-    auth(USER_ROLES.rider),
-    validateRequest(RiderValidation.requestRideZodSchema),
-    RiderController.requestRide
+  '/request',
+  auth(USER_ROLES.rider),
+  validateRequest(RideValidation.rideRequestZodSchema),
+  RideController.requestRide
 );
 
 router.patch(
-    '/rides/:rideId/cancel',
-    auth(USER_ROLES.rider),
-    validateRequest(RiderValidation.cancelRideZodSchema),
-    RiderController.cancelRide
+  '/cancel/:id',
+  auth(USER_ROLES.rider),
+  RideController.cancelRide
 );
 
-router.get(
-    '/rides/history',
-    auth(USER_ROLES.rider),
-    RiderController.getRideHistory
+router.patch(
+  '/accept-reject',
+  auth(USER_ROLES.driver),
+  validateRequest(RideValidation.acceptRejectZodSchema),
+  RideController.acceptOrRejectRide
 );
+
+router.patch(
+  '/status',
+  auth(USER_ROLES.driver),
+  validateRequest(RideValidation.updateRideStatusZodSchema),
+  RideController.updateRideStatus
+);
+
+router.get('/my-rides', auth(USER_ROLES.rider, USER_ROLES.driver), RideController.getMyRides);
 
 export const RiderRoutes = router;

@@ -1,16 +1,39 @@
-import { Model, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
-export type IRide = {
-  rider: Types.ObjectId;
-  driver: Types.ObjectId | null;
-  pickupLocation: { type: string; coordinates: [number, number] };
-  destinationLocation: { type: string; coordinates: [number, number] };
-  status: 'requested' | 'accepted' | 'picked_up' | 'in_transit' | 'completed' | 'canceled';
-  cancelReason: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-};
+export interface ICoordinate {
+  type: 'Point';
+  coordinates: [number, number]; // [longitude, latitude]
+}
 
-export type RideModal = {
-  isRideExist(id: string): Promise<IRide | null>;
-} & Model<IRide>;
+export type IRideStatus =
+  | 'requested'
+  | 'accepted'
+  | 'picked_up'
+  | 'in_transit'
+  | 'completed'
+  | 'cancelled';
+
+export interface IRide {
+  _id: string;
+  rider: string;
+  driver?: Types.ObjectId | string;
+  pickupAddress: string;
+  destinationAddress: string;
+  pickupLocation: ICoordinate;
+  destinationLocation: ICoordinate;
+  fare?: number;
+  status: IRideStatus;
+  timestamps?: {
+    requestedAt?: Date;
+    acceptedAt?: Date;
+    pickedUpAt?: Date;
+    inTransitAt?: Date;
+    completedAt?: Date;
+    cancelledAt?: Date;
+  };
+}
+
+export interface PaginationQuery {
+  page?: number;
+  limit?: number;
+}

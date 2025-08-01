@@ -1,3 +1,5 @@
+// auth.validation.ts
+
 import { z } from 'zod';
 
 const createVerifyEmailZodSchema = z.object({

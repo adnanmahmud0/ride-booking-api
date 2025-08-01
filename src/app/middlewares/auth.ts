@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { Secret } from 'jsonwebtoken';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import { jwtHelper } from '../../helpers/jwtHelper';
+import { JwtPayload } from 'jsonwebtoken';
 
 const auth =
   (...roles: string[]) =>
@@ -17,22 +17,25 @@ const auth =
       if (tokenWithBearer && tokenWithBearer.startsWith('Bearer')) {
         const token = tokenWithBearer.split(' ')[1];
 
-        //verify token
+        // ✅ Corrected cast
         const verifyUser = jwtHelper.verifyToken(
           token,
-          config.jwt.jwt_secret as Secret
+          config.jwt.jwt_secret as string
         );
-        //set user to header
-        if (!verifyUser) {
+
+        // ✅ Ensure it's not a string
+        if (!verifyUser || typeof verifyUser === 'string') {
           throw new ApiError(StatusCodes.UNAUTHORIZED, 'Invalid token');
         }
+
+        // ✅ Type-safe assignment
         req.user = verifyUser;
 
-        //guard user
+        // ✅ Role guard
         if (roles.length && !roles.includes(verifyUser.role)) {
           throw new ApiError(
             StatusCodes.FORBIDDEN,
-            "You don't have permission to access this api"
+            "You don't have permission to access this API"
           );
         }
 

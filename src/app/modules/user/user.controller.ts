@@ -1,3 +1,5 @@
+// user.controller.ts (Updated)
+
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import catchAsync from '../../../shared/catchAsync';
@@ -31,7 +33,6 @@ const getUserProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-//update profile
 const updateProfile = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user;
@@ -52,4 +53,24 @@ const updateProfile = catchAsync(
   }
 );
 
-export const UserController = { createUser, getUserProfile, updateProfile };
+const updateUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user;
+    let image = getSingleFilePath(req.files, 'image');
+
+    const data = {
+      image,
+      ...req.body,
+    };
+    const result = await UserService.updateUserToDB(user, data);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: 'User information updated successfully',
+      data: result,
+    });
+  }
+);
+
+export const UserController = { createUser, getUserProfile, updateProfile, updateUser };

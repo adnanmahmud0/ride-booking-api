@@ -4,53 +4,66 @@ import { Server } from 'socket.io';
 import app from './app';
 import config from './config';
 import { seedSuperAdmin } from './DB/seedAdmin';
-import { errorLogger, logger } from './shared/looger';
+
 import { socketHelper } from './helpers/socketHelper';
+import { errorLogger, logger } from './shared/looger';
 
+// Declare global io for TypeScript
+declare global {
+  namespace NodeJS {
+    interface Global {
+      io: Server;
+    }
+  }
+}
 
-//uncaught exception
+// Uncaught exception handling
 process.on('uncaughtException', error => {
-  errorLogger.error('UnhandleException Detected', error);
+  errorLogger.error('Uncaught Exception Detected', error);
   process.exit(1);
 });
 
 let server: any;
 async function main() {
   try {
-    mongoose.connect(config.database_url as string);
+    await mongoose.connect(config.database_url as string);
     logger.info(colors.green('🚀 Database connected successfully'));
 
-    //Seed Super Admin after database connection is successful
+    // Seed Super Admin
     await seedSuperAdmin();
 
-    const port =
-      typeof config.port === 'number' ? config.port : Number(config.port);
+    const port = typeof config.port === 'number' ? config.port : Number(config.port);
 
     server = app.listen(port, config.ip_address as string, () => {
-      logger.info(
-        colors.yellow(`♻️  Application listening on port:${config.port}`)
-      );
+      logger.info(colors.yellow(`♻️ Application listening on port:${port}`));
     });
 
-    //socket
+    // Socket.IO setup
     const io = new Server(server, {
       pingTimeout: 60000,
       cors: {
         origin: '*',
       },
     });
+
+    // Socket.IO error handling
+    io.on('error', (error) => {
+      errorLogger.error('Socket.IO error:', error);
+    });
+
     socketHelper.socket(io);
-    //@ts-ignore
-    global.io = io;
+    global.io = io; // Set global io for services
+
   } catch (error) {
-    errorLogger.error(colors.red('🤢 Failed to connect Database'));
+    errorLogger.error(colors.red('🤢 Failed to connect Database'), error);
+    process.exit(1);
   }
 
-  //handle unhandleRejection
+  // Unhandled rejection handling
   process.on('unhandledRejection', error => {
     if (server) {
       server.close(() => {
-        errorLogger.error('UnhandleRejection Detected', error);
+        errorLogger.error('Unhandled Rejection Detected', error);
         process.exit(1);
       });
     } else {
@@ -61,10 +74,12 @@ async function main() {
 
 main();
 
-//SIGTERM
+// SIGTERM handling
 process.on('SIGTERM', () => {
-  logger.info('SIGTERM IS RECEIVE');
+  logger.info('SIGTERM RECEIVED');
   if (server) {
-    server.close();
+    server.close(() => {
+      process.exit(0);
+    });
   }
 });

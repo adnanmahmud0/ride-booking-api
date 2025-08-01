@@ -1,37 +1,36 @@
-import express from "express";
-import { USER_ROLES } from "../../../enums/user";
-import auth from "../../middlewares/auth";
-import validateRequest from "../../middlewares/validateRequest";
-import { DriverController } from "./driver.controller";
-import { DriverValidation } from "./driver.validation";
+import express from 'express';
+import auth from '../../middlewares/auth';
+import validateRequest from '../../middlewares/validateRequest';
+import { DriverValidation } from './driver.validation';
+import { DriverController } from './driver.controller';
+import { USER_ROLES } from '../../../enums/user';
 
 const router = express.Router();
 
+// Driver Routes
 router.post(
-  "/rides/accept-reject",
+  '/create-profile',
   auth(USER_ROLES.driver),
-  validateRequest(DriverValidation.acceptRejectRideZodSchema),
-  DriverController.acceptRejectRide
+  validateRequest(DriverValidation.createDriverProfileZodSchema),
+  DriverController.createDriverProfile
 );
-
 router.patch(
-  "/rides/:rideId/status",
+  '/update-profile',
   auth(USER_ROLES.driver),
-  validateRequest(DriverValidation.updateRideStatusZodSchema),
-  DriverController.updateRideStatus
+  validateRequest(DriverValidation.updateDriverProfileZodSchema),
+  DriverController.updateDriverProfile
 );
-
+router.get('/me', auth(USER_ROLES.driver), DriverController.getMyDriverProfile);
 router.patch(
-  "/availability",
+  '/set-availability',
   auth(USER_ROLES.driver),
   validateRequest(DriverValidation.setAvailabilityZodSchema),
   DriverController.setAvailability
 );
+router.get('/earnings', auth(USER_ROLES.driver), DriverController.getEarnings);
 
-router.get(
-  "/earnings/history",
-  auth(USER_ROLES.driver),
-  DriverController.getEarningsHistory
-);
+// Admin Routes
+router.patch('/approve/:id', auth(USER_ROLES.admin), DriverController.approveDriver);
+router.patch('/suspend/:id', auth(USER_ROLES.admin), DriverController.suspendDriver);
 
 export const DriverRoutes = router;

@@ -1,0 +1,30 @@
+Fri Aug 01 2025 14:0:23 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 116.436 ms
+Fri Aug 01 2025 14:3:55 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:3:56 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:4:16 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:4:17 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:4:33 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:4:34 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:4:43 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:4:44 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:5:32 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:5:33 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:5:42 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:5:43 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:5:53 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:5:54 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:6:0 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:6:1 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:6:9 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:6:10 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:6:13 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:6:14 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:6:23 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Fri Aug 01 2025 14:6:24 [SERVER-NAME] info: [33m♻️  Application listening on port:9000[39m
+Fri Aug 01 2025 14:6:35 [SERVER-NAME] info: ::1 - POST /api/v1/rider/request 201 - 175.974 ms
+Fri Aug 01 2025 14:17:18 [SERVER-NAME] info: ::1 - PATCH /api/v1/rider/cancel/688c758ab86de14a1a0aa6bf - - - ms
+Fri Aug 01 2025 14:17:53 [SERVER-NAME] info: ::1 - PATCH /api/v1/rider/cancel/688c758ab86de14a1a0aa6bf 200 - 116.440 ms
+Fri Aug 01 2025 14:24:35 [SERVER-NAME] info: ::1 - POST /api/v1/rider/request 201 - 106.329 ms
+Fri Aug 01 2025 14:26:42 [SERVER-NAME] info: ::1 - POST /api/v1/rider/request 201 - 133.597 ms
+Fri Aug 01 2025 14:28:40 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 145.161 ms
+Fri Aug 01 2025 14:29:9 [SERVER-NAME] info: ::1 - PATCH /api/v1/rider/accept-reject 200 - 116.008 ms
