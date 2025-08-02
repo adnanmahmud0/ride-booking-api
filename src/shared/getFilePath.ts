@@ -1,4 +1,4 @@
-type IFolderName = 'image' | 'media' | 'doc';
+type IFolderName = 'image' | 'media' | 'doc' | 'licenseImage';
 
 //single file
 export const getSingleFilePath = (files: any, folderName: IFolderName) => {

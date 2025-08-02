@@ -1,125 +1,183 @@
+// driver.service.ts
+
 import { StatusCodes } from 'http-status-codes';
 import { JwtPayload } from 'jsonwebtoken';
-import { Server } from 'socket.io';
 import ApiError from '../../../errors/ApiError';
-
-import { ICar, IDriverInfo } from './driver.interface';
+import unlinkFile from '../../../shared/unlinkFile';
 import { Driver } from './driver.model';
 import { Ride } from '../rider/rider.model';
+import { RIDE_STATUSES } from '../../../enums/ride';
+import { USER_ROLES } from '../../../enums/user';
+import { SystemSettings } from '../systemSettings/systemSettings.model';
 
-// Declare global io (set in server.ts)
-declare global {
-  var io: Server;
-}
 
-// Create driver profile
-const createDriverProfile = async (user: JwtPayload, payload: { car: ICar; driverInfo: IDriverInfo }) => {
-  const existingDriver = await Driver.findOne({ user: user.id });
-  if (existingDriver) {
+const createDriverProfile = async (user: JwtPayload, payload: any) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can create a profile');
+  }
+  const existingProfile = await Driver.findOne({ userId: user.id });
+  if (existingProfile) {
     throw new ApiError(StatusCodes.BAD_REQUEST, 'Driver profile already exists');
   }
-
-  const driver = await Driver.create({
-    user: user.id,
-    car: payload.car,
-    driverInfo: payload.driverInfo,
-    isApproved: false,
-    availability: 'offline',
-  });
-
+  const driver = await Driver.create({ userId: user.id, ...payload });
   return driver;
 };
 
-// Update driver profile
-const updateDriverProfile = async (user: JwtPayload, payload: { car?: Partial<ICar>; driverInfo?: Partial<IDriverInfo> }) => {
-  const driver = await Driver.findOne({ user: user.id });
-  if (!driver) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+const getDriverProfile = async (user: JwtPayload, driverId?: string) => {
+  if (user.role === USER_ROLES.driver && driverId && driverId !== user.id) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Drivers can only view their own profile');
   }
-
-  if (payload.car) {
-    driver.car = { ...driver.car, ...payload.car };
+  const query = user.role === USER_ROLES.driver ? { userId: user.id } : { _id: driverId };
+  if (!query._id && !query.userId) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Driver ID required for admin access');
   }
-  if (payload.driverInfo) {
-    driver.driverInfo = { ...driver.driverInfo, ...payload.driverInfo };
-  }
-
-  await driver.save();
-  return driver;
-};
-
-// Set driver availability
-const setAvailability = async (user: JwtPayload, payload: { availability: 'online' | 'offline' }) => {
-  const driver = await Driver.findOne({ user: user.id });
-  if (!driver) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
-  }
-
-  driver.availability = payload.availability;
-  await driver.save();
-
-  // Emit availability update to Socket.IO
-  global.io.emit('updateAvailability', {
-    userId: user.id,
-    availability: payload.availability,
-  });
-
-  return driver;
-};
-
-// Get driver profile
-const getMyDriverProfile = async (user: JwtPayload) => {
-  const driver = await Driver.findOne({ user: user.id }).populate('user');
+  const driver = await Driver.findOne(query).populate('userId', 'name email contact location role');
   if (!driver) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
   }
   return driver;
 };
 
-// Get driver earnings
-const getEarnings = async (user: JwtPayload) => {
-  const driver = await Driver.findOne({ user: user.id });
+const updateDriverProfile = async (user: JwtPayload, payload: any) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can update their profile');
+  }
+  const driver = await Driver.findOne({ userId: user.id });
   if (!driver) {
     throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
   }
-
-  const rides = await Ride.find({ driver: user.id, status: 'completed' });
-  const totalEarnings = rides.reduce((sum, ride) => sum + (ride.fare || 0), 0);
-
-  return { totalEarnings, rides };
+  if (payload.licenseImage && driver.driverInfo.licenseImage) {
+    unlinkFile(driver.driverInfo.licenseImage);
+  }
+  const updatedDriver = await Driver.findOneAndUpdate({ userId: user.id }, payload, { new: true });
+  return updatedDriver;
 };
 
-// Approve driver (admin)
 const approveDriver = async (driverId: string) => {
   const driver = await Driver.findById(driverId);
-  if (!driver) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
-  }
-
+  if (!driver) throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
   driver.isApproved = true;
+  driver.availability = 'online';
   await driver.save();
   return driver;
 };
 
-// Suspend driver (admin)
 const suspendDriver = async (driverId: string) => {
   const driver = await Driver.findById(driverId);
-  if (!driver) {
-    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
-  }
-
+  if (!driver) throw new ApiError(StatusCodes.NOT_FOUND, 'Driver not found');
   driver.isApproved = false;
   driver.availability = 'offline';
   await driver.save();
   return driver;
 };
 
+const acceptRide = async (user: JwtPayload, rideId: string) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can accept rides');
+  }
+  const driver = await Driver.findOne({ userId: user.id });
+  if (!driver || !driver.isApproved || driver.availability !== 'online') {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Driver not approved or offline');
+  }
+  const ride = await Ride.findById(rideId);
+  if (!ride || ride.status !== RIDE_STATUSES.requested) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride not found or not in requested status');
+  }
+  ride.driver = user.id;
+  ride.status = RIDE_STATUSES.accepted;
+  await ride.save();
+  return ride;
+};
+
+const rejectRide = async (user: JwtPayload, rideId: string) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can reject rides');
+  }
+  const ride = await Ride.findById(rideId);
+  if (!ride || ride.status !== RIDE_STATUSES.requested) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride not found or not in requested status');
+  }
+  ride.status = RIDE_STATUSES.rejected;
+  await ride.save();
+  return ride;
+};
+
+const updateRideStatus = async (user: JwtPayload, rideId: string, status: any) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can update ride status');
+  }
+  const ride = await Ride.findById(rideId);
+  if (!ride || !ride.driver || ride.driver.toString() !== user.id) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Ride not found or not assigned to this driver');
+  }
+  if (!Object.values(RIDE_STATUSES).includes(status)) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid ride status');
+  }
+  ride.status = status;
+  await ride.save();
+  return ride;
+};
+
+const toggleAvailability = async (user: JwtPayload) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can toggle availability');
+  }
+  const driver = await Driver.findOne({ userId: user.id });
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
+  if (!driver.isApproved) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Driver not approved');
+  }
+  driver.availability = driver.availability === 'online' ? 'offline' : 'online';
+  await driver.save();
+  return driver;
+};
+
+const getDriverRides = async (user: JwtPayload) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can view their rides');
+  }
+  const rides = await Ride.find({ driver: user.id }).populate('rider driver');
+  return rides;
+};
+
+const getDriverEarnings = async (user: JwtPayload, startDate?: string, endDate?: string) => {
+  if (user.role !== USER_ROLES.driver) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only drivers can view their earnings');
+  }
+  const driver = await Driver.findOne({ userId: user.id });
+  if (!driver) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'Driver profile not found');
+  }
+  const systemSettings = await SystemSettings.findOne();
+  if (!systemSettings) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'System settings not found');
+  }
+  const query: any = { driver: user.id, status: RIDE_STATUSES.completed };
+  if (startDate) query.createdAt = { $gte: new Date(startDate) };
+  if (endDate) query.createdAt = { ...query.createdAt, $lte: new Date(endDate) };
+  const rides = await Ride.find(query).select('status createdAt updatedAt');
+  // Fallback: Assume a fixed earning per completed ride if distanceKm/fare are unavailable
+  const fixedEarningPerRide = systemSettings.farePerKm || 10; // Default to 10 if farePerKm is 0
+  const totalEarnings = rides.length * fixedEarningPerRide;
+  return {
+    totalEarnings,
+    rideCount: rides.length,
+    rides,
+  };
+};
+
 export const DriverService = {
   createDriverProfile,
+  getDriverProfile,
   updateDriverProfile,
-  setAvailability,
-  getMyDriverProfile,
-  getEarnings,
   approveDriver,
   suspendDriver,
+  acceptRide,
+  rejectRide,
+  updateRideStatus,
+  toggleAvailability,
+  getDriverRides,
+  getDriverEarnings,
 };

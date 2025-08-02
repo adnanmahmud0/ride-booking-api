@@ -1,3 +1,5 @@
+// user.interface.ts
+
 import { Model } from 'mongoose';
 import { USER_ROLES } from '../../../enums/user';
 

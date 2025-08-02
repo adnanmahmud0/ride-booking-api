@@ -1,39 +1,43 @@
+// rider.route.ts
+
 import express from 'express';
+import { USER_ROLES } from '../../../enums/user';
 import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
-import { USER_ROLES } from '../../../enums/user';
-import { RideController } from './rider.controller';
-import { RideValidation } from './rider.validation';
-
+import { RiderController } from './rider.controller';
+import { RiderValidation } from './rider.validation';
 const router = express.Router();
 
 router.post(
   '/request',
   auth(USER_ROLES.rider),
-  validateRequest(RideValidation.rideRequestZodSchema),
-  RideController.requestRide
+  validateRequest(RiderValidation.requestRideZodSchema),
+  RiderController.requestRide
 );
 
 router.patch(
-  '/cancel/:id',
+  '/:id/cancel',
   auth(USER_ROLES.rider),
-  RideController.cancelRide
+  RiderController.cancelRide
 );
 
-router.patch(
-  '/accept-reject',
-  auth(USER_ROLES.driver),
-  validateRequest(RideValidation.acceptRejectZodSchema),
-  RideController.acceptOrRejectRide
+router.get(
+  '/all-rides',
+  auth(USER_ROLES.rider),
+  RiderController.getRiderRides
 );
 
-router.patch(
-  '/status',
-  auth(USER_ROLES.driver),
-  validateRequest(RideValidation.updateRideStatusZodSchema),
-  RideController.updateRideStatus
+router.post(
+  '/:id/pay',
+  auth(USER_ROLES.rider),
+  validateRequest(RiderValidation.payForRideZodSchema),
+  RiderController.payForRide
 );
 
-router.get('/my-rides', auth(USER_ROLES.rider, USER_ROLES.driver), RideController.getMyRides);
+router.get(
+  '/admin/rides',
+  auth(USER_ROLES.admin, USER_ROLES.super_admin),
+  RiderController.getAllRides
+);
 
 export const RiderRoutes = router;

@@ -1,0 +1,17 @@
+Sat Aug 02 2025 14:16:52 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/profile 500 - 30.997 ms
+Sat Aug 02 2025 14:17:0 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/profile 500 - 3.934 ms
+Sat Aug 02 2025 14:21:32 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users 404 - 0.930 ms
+Sat Aug 02 2025 14:22:0 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users 404 - 0.476 ms
+Sat Aug 02 2025 14:29:57 [SERVER-NAME] error: ::1 - PATCH /api/v1/admin/users/block/688dc278e16d73a34af13572 404 - 0.418 ms
+Sat Aug 02 2025 14:31:24 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 403 - 56.686 ms
+Sat Aug 02 2025 14:32:18 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 400 - 115.481 ms
+Sat Aug 02 2025 14:33:38 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 400 - 104.487 ms
+Sat Aug 02 2025 14:34:56 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 400 - 103.038 ms
+Sat Aug 02 2025 14:35:29 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 400 - 94.978 ms
+Sat Aug 02 2025 14:36:24 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13576 404 - 49.845 ms
+Sat Aug 02 2025 14:36:28 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af1357 500 - 79.378 ms
+Sat Aug 02 2025 14:36:36 [SERVER-NAME] error: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 400 - 97.577 ms
+Sat Aug 02 2025 14:43:26 [SERVER-NAME] error: ::1 - DELETE /api/v1/user/admin/users/block/688dc278e16d73a34af13572 404 - 1.204 ms
+Sat Aug 02 2025 14:58:5 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/?id=688dd1d6cb1c9abf6b7294f7 404 - 1.161 ms
+Sat Aug 02 2025 14:58:32 [SERVER-NAME] error: ::1 - PATCH /api/v1/driver/approve/688dd1d6cb1c9abf6b7294f7 404 - 0.962 ms
+Sat Aug 02 2025 14:59:5 [SERVER-NAME] error: ::1 - PATCH /api/v1/admin/drivers/approve/688dd1d6cb1c9abf6b7294f7 404 - 0.253 ms

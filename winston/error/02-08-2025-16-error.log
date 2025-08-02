@@ -1,0 +1,7 @@
+Sat Aug 02 2025 16:2:58 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 184.030 ms
+Sat Aug 02 2025 16:5:8 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 310.663 ms
+Sat Aug 02 2025 16:11:2 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 170.995 ms
+Sat Aug 02 2025 16:16:52 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 176.860 ms
+Sat Aug 02 2025 16:19:3 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 500 - 219.829 ms
+Sat Aug 02 2025 16:27:7 [SERVER-NAME] error: ::1 - PATCH /api/v1/rider/688de727d9f25cd23e8d1974/cancel 401 - 36.892 ms
+Sat Aug 02 2025 16:30:9 [SERVER-NAME] error: ::1 - PATCH /api/v1/rider/ 404 - 2.929 ms

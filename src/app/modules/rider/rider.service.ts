@@ -1,232 +1,130 @@
 import { StatusCodes } from 'http-status-codes';
-import ApiError from '../../../errors/ApiError';
 import { JwtPayload } from 'jsonwebtoken';
-import { Server } from 'socket.io';
+import ApiError from '../../../errors/ApiError';
 import { Ride } from './rider.model';
-import { Types } from 'mongoose';
-import { IRideStatus, IRide, PaginationQuery } from './rider.interface';
-import { Driver } from '../driver/driver.model';
+import { RIDE_STATUSES } from '../../../enums/ride';
+import { USER_ROLES } from '../../../enums/user';
+import { SystemSettings } from '../systemSettings/systemSettings.model';
 
-// Declare global io (set in server.ts)
-declare global {
-  var io: Server;
-}
-
-// Define valid status transitions
-const validTransitions: Record<IRideStatus, IRideStatus[]> = {
-  requested: ['accepted', 'cancelled'],
-  accepted: ['picked_up', 'cancelled'],
-  picked_up: ['in_transit'],
-  in_transit: ['completed'],
-  completed: [],
-  cancelled: [],
+const parseCoordinates = (location: string): [number, number] => {
+  const [longitude, latitude] = location.split(',').map(coord => parseFloat(coord.trim()));
+  if (isNaN(longitude) || isNaN(latitude)) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Invalid coordinate format');
+  }
+  return [longitude, latitude];
 };
 
-// Rider requesting a ride
-const requestRide = async (riderId: string, payload: any): Promise<IRide> => {
-  const {
-    pickupAddress,
-    destinationAddress,
-    pickupLocation,
-    destinationLocation,
-  } = payload;
+const calculateDistance = (pickup: [number, number], destination: [number, number]): number => {
+  const [lon1, lat1] = pickup;
+  const [lon2, lat2] = destination;
+  const R = 6371;
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLon / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
 
-  const ride = await Ride.create({
-    rider: riderId,
-    pickupAddress,
-    destinationAddress,
-    pickupLocation: { type: 'Point', coordinates: pickupLocation.coordinates },
-    destinationLocation: { type: 'Point', coordinates: destinationLocation.coordinates },
-    status: 'requested',
-    timestamps: {
-      requestedAt: new Date(),
+const requestRide = async (
+  user: JwtPayload,
+  payload: { pickupLocation: string; destinationLocation: string }
+) => {
+  if (user.role !== USER_ROLES.rider) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only riders can request rides');
+  }
+
+  const settings = await SystemSettings.findOne();
+  if (!settings) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'System settings not found');
+  }
+
+  const pickupCoords = parseCoordinates(payload.pickupLocation);
+  const destinationCoords = parseCoordinates(payload.destinationLocation);
+  const distance = calculateDistance(pickupCoords, destinationCoords);
+  const fare = distance * settings.farePerKm;
+
+  const rideData = {
+    rider: user.id,
+    pickupLocation: {
+      type: 'Point',
+      coordinates: pickupCoords,
     },
-  });
-
-  // Emit ride request to online drivers
-  global.io.emit('rideRequest', { rideId: ride._id.toString(), riderId });
-
-  return {
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
+    destinationLocation: {
+      type: 'Point',
+      coordinates: destinationCoords,
+    },
+    fare,
+    status: RIDE_STATUSES.requested,
   };
+
+  const ride = await Ride.create(rideData);
+  return ride;
 };
 
-// Rider cancels a ride
-const cancelRide = async (riderId: string, rideId: string): Promise<IRide> => {
+const cancelRide = async (user: JwtPayload, rideId: string) => {
+  if (user.role !== USER_ROLES.rider) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only riders can cancel rides');
+  }
   const ride = await Ride.findById(rideId);
-  if (!ride) throw new ApiError(StatusCodes.NOT_FOUND, 'Ride not found');
-
-  if (ride.rider.toString() !== riderId) {
-    throw new ApiError(StatusCodes.FORBIDDEN, 'You are not authorized to cancel this ride');
+  if (!ride || ride.rider.toString() !== user.id) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Ride not found or not owned by this rider');
   }
-
-  if (ride.status !== 'requested') {
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride can only be cancelled when in requested status');
+  if (ride.status !== RIDE_STATUSES.requested && ride.status !== RIDE_STATUSES.accepted) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride cannot be cancelled in this status');
   }
-
-  ride.status = 'cancelled';
-  ride.timestamps = ride.timestamps || {};
+  const settings = await SystemSettings.findOne();
+  if (!settings) {
+    throw new ApiError(StatusCodes.NOT_FOUND, 'System settings not found');
+  }
+  if (ride.timestamps.requestedAt && (Date.now() - ride.timestamps.requestedAt.getTime()) > settings.cancellationWindowMinutes * 60000) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Cancellation window has expired');
+  }
+  ride.status = RIDE_STATUSES.cancelled;
   ride.timestamps.cancelledAt = new Date();
-
   await ride.save();
-
-  // Notify assigned driver (if any)
-  if (ride.driver) {
-    global.io.emit('rideCancelled', {
-      rideId: ride._id.toString(),
-      riderId,
-      driverId: ride.driver.toString(),
-    });
-  }
-
-  return {
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
-  };
+  return ride;
 };
 
-// Driver accepts or rejects a ride
-const acceptOrRejectRide = async (driverId: string, payload: { rideId: string; action: 'accept' | 'reject' }): Promise<IRide> => {
-  const { rideId, action } = payload;
+const getRiderRides = async (user: JwtPayload) => {
+  if (user.role !== USER_ROLES.rider) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only riders can view their rides');
+  }
+  const rides = await Ride.find({ rider: user.id }).populate('rider driver');
+  return rides;
+};
 
+const payForRide = async (user: JwtPayload, rideId: string, payload: { paymentMethod: string }) => {
+  if (user.role !== USER_ROLES.rider) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only riders can make payments');
+  }
   const ride = await Ride.findById(rideId);
-  if (!ride) throw new ApiError(StatusCodes.NOT_FOUND, 'Ride not found');
-
-  if (ride.status !== 'requested') {
-    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride is no longer in requested status');
+  if (!ride || ride.rider.toString() !== user.id) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Ride not found or not owned by this rider');
   }
-
-  // Validate driver is online and approved
-  const driver = await Driver.findOne({ user: driverId });
-  if (!driver || driver.availability !== 'online' || !driver.isApproved) {
-    throw new ApiError(StatusCodes.FORBIDDEN, 'Driver is not online or approved');
+  if (ride.status !== RIDE_STATUSES.completed) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride must be completed before payment');
   }
-
-  ride.timestamps = ride.timestamps || {};
-
-  if (action === 'accept') {
-    ride.status = 'accepted';
-    ride.driver = new Types.ObjectId(driverId);
-    ride.timestamps.acceptedAt = new Date();
-  } else {
-    ride.status = 'cancelled';
-    ride.timestamps.cancelledAt = new Date();
+  if (ride.paymentStatus === 'completed') {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Ride already paid');
   }
-
+  ride.paymentStatus = 'completed';
   await ride.save();
-
-  // Notify rider
-  global.io.emit('rideAction', {
-    rideId: ride._id.toString(),
-    driverId,
-    riderId: ride.rider.toString(),
-    action,
-  });
-
-  return {
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
-  };
+  return ride;
 };
 
-// Driver updates ride status
-const updateRideStatus = async (driverId: string, payload: { rideId: string; status: IRideStatus }): Promise<IRide> => {
-  const { rideId, status } = payload;
-
-  const ride = await Ride.findById(rideId);
-  if (!ride) throw new ApiError(StatusCodes.NOT_FOUND, 'Ride not found');
-
-  if (ride.driver?.toString() !== driverId) {
-    throw new ApiError(StatusCodes.FORBIDDEN, 'You are not assigned to this ride');
-  }
-
-  if (!validTransitions[ride.status].includes(status)) {
-    throw new ApiError(StatusCodes.BAD_REQUEST, `Cannot transition from ${ride.status} to ${status}`);
-  }
-
-  ride.status = status;
-  ride.timestamps = ride.timestamps || {};
-
-  if (status === 'picked_up') {
-    ride.timestamps.pickedUpAt = new Date();
-  }
-  if (status === 'in_transit') {
-    ride.timestamps.inTransitAt = new Date();
-  }
-  if (status === 'completed') {
-    ride.timestamps.completedAt = new Date();
-  }
-
-  await ride.save();
-
-  // Notify rider
-  global.io.emit('rideStatusUpdate', {
-    rideId: ride._id.toString(),
-    riderId: ride.rider.toString(),
-    status,
-  });
-
-  return {
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
-  };
+const getAllRides = async () => {
+  const rides = await Ride.find({}).populate('rider driver');
+  return rides;
 };
 
-// Get rides for a user (rider or driver)
-const getUserRides = async (user: JwtPayload, query: PaginationQuery) => {
-  const { page = 1, limit = 10 } = query;
-  const skip = (page - 1) * limit;
-
-  const filter = user.role === 'rider' ? { rider: user.id } : { driver: user.id };
-
-  const rides = await Ride.find(filter)
-    .populate('rider driver')
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit);
-
-  const total = await Ride.countDocuments(filter);
-
-  const transformedRides = rides.map(ride => ({
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
-  }));
-
-  return {
-    rides: transformedRides,
-    total,
-    page,
-    limit,
-  };
-};
-
-// Admin get all rides
-const getAllRides = async (): Promise<IRide[]> => {
-  const rides = await Ride.find().populate('rider driver');
-  return rides.map(ride => ({
-    ...ride.toObject(),
-    _id: ride._id.toString(),
-    rider: ride.rider.toString(),
-    driver: ride.driver?.toString(),
-  }));
-};
-
-export const RideService = {
+export const RiderService = {
   requestRide,
   cancelRide,
-  acceptOrRejectRide,
-  updateRideStatus,
-  getUserRides,
+  getRiderRides,
+  payForRide,
   getAllRides,
 };

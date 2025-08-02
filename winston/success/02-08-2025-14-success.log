@@ -1,0 +1,40 @@
+Sat Aug 02 2025 14:0:32 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:0:33 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:0:38 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:0:38 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:1:17 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 277.713 ms
+Sat Aug 02 2025 14:1:21 [SERVER-NAME] info: Mail send successfully
+Sat Aug 02 2025 14:1:39 [SERVER-NAME] info: ::1 - POST /api/v1/auth/verify-email 200 - 111.963 ms
+Sat Aug 02 2025 14:3:57 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 117.155 ms
+Sat Aug 02 2025 14:4:24 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 128.922 ms
+Sat Aug 02 2025 14:9:16 [SERVER-NAME] info: ::1 - GET /api/v1/user/profile 200 - 66.845 ms
+Sat Aug 02 2025 14:10:29 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 103.242 ms
+Sat Aug 02 2025 14:13:1 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 219.207 ms
+Sat Aug 02 2025 14:16:3 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:16:4 [SERVER-NAME] info: ✨ Super Admin account has been successfully created!
+Sat Aug 02 2025 14:16:4 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:16:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:16:45 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:17:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:17:11 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:17:12 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 164.522 ms
+Sat Aug 02 2025 14:17:54 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:17:55 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:18:3 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 124.495 ms
+Sat Aug 02 2025 14:22:11 [SERVER-NAME] info: ::1 - GET /api/v1/user/admin/users 200 - 53.469 ms
+Sat Aug 02 2025 14:24:1 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 111.696 ms
+Sat Aug 02 2025 14:24:20 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 108.372 ms
+Sat Aug 02 2025 14:25:40 [SERVER-NAME] info: ::1 - GET /api/v1/user/admin/users 200 - 48.424 ms
+Sat Aug 02 2025 14:32:10 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/profile 200 - 159.178 ms
+Sat Aug 02 2025 14:33:23 [SERVER-NAME] info: ::1 - POST /api/v1/auth/login 200 - 123.743 ms
+Sat Aug 02 2025 14:39:22 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:39:26 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 14:39:26 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 14:39:53 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/admin/users/block/688dc278e16d73a34af13572 200 - 110.002 ms
+Sat Aug 02 2025 14:43:51 [SERVER-NAME] info: ::1 - DELETE /api/v1/user/admin/users/688dc278e16d73a34af13572 200 - 98.265 ms
+Sat Aug 02 2025 14:46:4 [SERVER-NAME] info: ::1 - PATCH /api/v1/user/admin/system/settings 200 - 222.648 ms
+Sat Aug 02 2025 14:47:7 [SERVER-NAME] info: ::1 - GET /api/v1/user/admin/system/settings 200 - 51.135 ms
+Sat Aug 02 2025 14:52:38 [SERVER-NAME] info: ::1 - POST /api/v1/driver/create-profile 200 - 124.854 ms
+Sat Aug 02 2025 14:54:51 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/update-profile 200 - 117.065 ms
+Sat Aug 02 2025 14:55:14 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/update-profile 200 - 107.581 ms
+Sat Aug 02 2025 14:59:26 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/admin/drivers/approve/688dd1d6cb1c9abf6b7294f7 200 - 584.766 ms

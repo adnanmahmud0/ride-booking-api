@@ -1,75 +1,64 @@
+// src/app/modules/rider/rider.controller.ts
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { StatusCodes } from 'http-status-codes';
-import { RideService } from './rider.service';
+import { RiderService } from './rider.service';
 
 const requestRide = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const { pickupAddress, destinationAddress, pickupLocation, destinationLocation } = req.body;
-  const ride = await RideService.requestRide(user.id, { pickupAddress, destinationAddress, pickupLocation, destinationLocation });
+  const result = await RiderService.requestRide(req.user, req.body);
   sendResponse(res, {
     success: true,
-    statusCode: StatusCodes.CREATED,
+    statusCode: StatusCodes.OK,
     message: 'Ride requested successfully',
-    data: ride,
+    data: result,
   });
 });
 
 const cancelRide = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const ride = await RideService.cancelRide(user.id, req.params.id);
+  const result = await RiderService.cancelRide(req.user, req.params.id);
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
     message: 'Ride cancelled successfully',
-    data: ride,
-  });
-});
-
-const acceptOrRejectRide = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const { rideId, action } = req.body;
-  const result = await RideService.acceptOrRejectRide(user.id, { rideId, action });
-  sendResponse(res, {
-    success: true,
-    statusCode: StatusCodes.OK,
-    message: `Ride ${action}ed successfully`,
     data: result,
   });
 });
 
-const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const { rideId, status } = req.body;
-  const result = await RideService.updateRideStatus(user.id, { rideId, status });
+const getRiderRides = catchAsync(async (req: Request, res: Response) => {
+  const result = await RiderService.getRiderRides(req.user);
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
-    message: `Ride status updated to ${status}`,
+    message: 'Rider rides retrieved successfully',
     data: result,
   });
 });
 
-const getMyRides = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-  const { page, limit } = req.query;
-  const rides = await RideService.getUserRides(user, {
-    page: page ? parseInt(page as string) : undefined,
-    limit: limit ? parseInt(limit as string) : undefined,
-  });
+const payForRide = catchAsync(async (req: Request, res: Response) => {
+  const result = await RiderService.payForRide(req.user, req.params.id, req.body);
   sendResponse(res, {
     success: true,
     statusCode: StatusCodes.OK,
-    message: 'Rides fetched successfully',
-    data: rides,
+    message: 'Payment processed successfully',
+    data: result,
   });
 });
 
-export const RideController = {
+const getAllRides = catchAsync(async (req: Request, res: Response) => {
+  const result = await RiderService.getAllRides();
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: 'All rides retrieved successfully',
+    data: result,
+  });
+});
+
+export const RiderController = {
   requestRide,
   cancelRide,
-  acceptOrRejectRide,
-  updateRideStatus,
-  getMyRides,
+  getRiderRides,
+  payForRide,
+  getAllRides,
 };

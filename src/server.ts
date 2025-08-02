@@ -8,13 +8,10 @@ import { seedSuperAdmin } from './DB/seedAdmin';
 import { socketHelper } from './helpers/socketHelper';
 import { errorLogger, logger } from './shared/looger';
 
+
 // Declare global io for TypeScript
 declare global {
-  namespace NodeJS {
-    interface Global {
-      io: Server;
-    }
-  }
+  var io: Server;
 }
 
 // Uncaught exception handling
@@ -52,7 +49,7 @@ async function main() {
     });
 
     socketHelper.socket(io);
-    global.io = io; // Set global io for services
+    globalThis.io = io; // Set global io for services
 
   } catch (error) {
     errorLogger.error(colors.red('🤢 Failed to connect Database'), error);

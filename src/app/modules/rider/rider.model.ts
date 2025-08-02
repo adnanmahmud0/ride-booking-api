@@ -1,37 +1,90 @@
-import { Schema, model, Types } from 'mongoose';
-import { IRide, IRideStatus } from './rider.interface';
+// src/app/modules/rider/rider.model.ts
 
-const RideSchema = new Schema<IRide>({
-  _id: { type: String, required: true },
-  rider: { type: String, required: true },
-  driver: { type: String },
-  pickupAddress: { type: String, required: true },
-  destinationAddress: { type: String, required: true },
-  pickupLocation: {
-    type: { type: String, enum: ['Point'], default: 'Point', required: true },
-    coordinates: { type: [Number], required: true }, // [longitude, latitude]
-  },
-  destinationLocation: {
-    type: { type: String, enum: ['Point'], default: 'Point', required: true },
-    coordinates: { type: [Number], required: true }, // [longitude, latitude]
-  },
-  fare: { type: Number },
-  status: {
-    type: String,
-    enum: ['requested', 'accepted', 'picked_up', 'in_transit', 'completed', 'cancelled'],
-    default: 'requested',
-  },
+import { Schema, model } from 'mongoose';
+import { RIDE_STATUSES } from '../../../enums/ride';
+
+interface IGeoJSON {
+  type: 'Point';
+  coordinates: [number, number];
+}
+
+interface IRide {
+  rider: Schema.Types.ObjectId;
+  driver?: Schema.Types.ObjectId;
+  pickupLocation: IGeoJSON;
+  destinationLocation: IGeoJSON;
+  status: string;
+  fare: number;
+  paymentStatus: 'pending' | 'completed';
   timestamps: {
-    requestedAt: { type: Date },
-    acceptedAt: { type: Date },
-    pickedUpAt: { type: Date },
-    inTransitAt: { type: Date },
-    completedAt: { type: Date },
-    cancelledAt: { type: Date },
+    requestedAt: Date;
+    acceptedAt?: Date;
+    startedAt?: Date;
+    completedAt?: Date;
+    cancelledAt?: Date;
+  };
+}
+
+const rideSchema = new Schema<IRide>(
+  {
+    rider: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    driver: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    pickupLocation: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    destinationLocation: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    status: {
+      type: String,
+      enum: Object.values(RIDE_STATUSES),
+      default: RIDE_STATUSES.requested,
+    },
+    fare: {
+      type: Number,
+      required: true,
+    },
+    paymentStatus: {
+      type: String,
+      enum: ['pending', 'completed'],
+      default: 'pending',
+    },
+    timestamps: {
+      requestedAt: { type: Date, default: Date.now },
+      acceptedAt: { type: Date },
+      startedAt: { type: Date },
+      completedAt: { type: Date },
+      cancelledAt: { type: Date },
+    },
   },
-});
+  { timestamps: true }
+);
 
-// Add geospatial index for proximity queries
-RideSchema.index({ pickupLocation: '2dsphere', destinationLocation: '2dsphere' });
+// Add 2dsphere index for geospatial queries
+rideSchema.index({ pickupLocation: '2dsphere' });
+rideSchema.index({ destinationLocation: '2dsphere' });
 
-export const Ride = model<IRide>('Ride', RideSchema);
+export const Ride = model<IRide>('Ride', rideSchema);

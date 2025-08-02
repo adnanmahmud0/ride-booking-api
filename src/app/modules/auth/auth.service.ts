@@ -18,6 +18,43 @@ import cryptoToken from '../../../util/cryptoToken';
 import generateOTP from '../../../util/generateOTP';
 import { ResetToken } from '../resetToken/resetToken.model';
 import { User } from '../user/user.model';
+import { IUser } from '../user/user.interface';
+import { USER_ROLES } from '../../../enums/user';
+
+// Create user
+const createUserToDB = async (payload: Partial<IUser>, requester?: JwtPayload): Promise<IUser> => {
+  if (
+    (payload.role === USER_ROLES.admin || payload.role === USER_ROLES.super_admin) &&
+    (!requester || requester.role !== USER_ROLES.super_admin)
+  ) {
+    throw new ApiError(StatusCodes.FORBIDDEN, 'Only super-admins can create admin or super-admin accounts');
+  }
+
+  const createUser = await User.create(payload);
+  if (!createUser) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, 'Failed to create user');
+  }
+
+  const otp = generateOTP();
+  const values = {
+    name: createUser.name,
+    otp: otp,
+    email: createUser.email!,
+  };
+  const createAccountTemplate = emailTemplate.createAccount(values);
+  emailHelper.sendEmail(createAccountTemplate);
+
+  const authentication = {
+    oneTimeCode: otp,
+    expireAt: new Date(Date.now() + 3 * 60000),
+  };
+  await User.findOneAndUpdate(
+    { _id: createUser._id },
+    { $set: { authentication } }
+  );
+
+  return createUser;
+};
 
 // Login
 const loginUserFromDB = async (payload: ILoginData) => {
@@ -50,7 +87,7 @@ const loginUserFromDB = async (payload: ILoginData) => {
 
   const createToken = jwtHelper.createToken(
     { id: isExistUser._id, role: isExistUser.role, email: isExistUser.email },
-    config.jwt.jwt_secret as string, // ✅ FIXED here
+    config.jwt.jwt_secret as string,
     config.jwt.jwt_expire_in as string
   );
 
@@ -71,7 +108,7 @@ const forgetPasswordToDB = async (email: string) => {
 
   const authentication = {
     oneTimeCode: otp,
-    expireAt: new Date(Date.now() + 3 * 60000),
+    expireAt: new Date(Date.now() + 60 * 60000),
   };
   await User.findOneAndUpdate({ email }, { $set: { authentication } });
 };
@@ -128,7 +165,7 @@ const verifyEmailToDB = async (payload: IVerifyEmail) => {
     await ResetToken.create({
       user: isExistUser._id,
       token: createToken,
-      expireAt: new Date(Date.now() + 5 * 60000),
+      expireAt: new Date(Date.now() + 60 * 60000),
     });
 
     message =
@@ -239,6 +276,7 @@ const changePasswordToDB = async (
 };
 
 export const AuthService = {
+  createUserToDB,
   verifyEmailToDB,
   loginUserFromDB,
   forgetPasswordToDB,

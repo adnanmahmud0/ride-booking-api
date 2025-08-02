@@ -1,0 +1,14 @@
+Sat Aug 02 2025 13:45:8 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 365.158 ms
+Sat Aug 02 2025 13:45:11 [SERVER-NAME] info: Mail send successfully
+Sat Aug 02 2025 13:47:3 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 13:47:4 [SERVER-NAME] info: ✨ Super Admin account has been successfully created!
+Sat Aug 02 2025 13:47:4 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 13:47:58 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 262.238 ms
+Sat Aug 02 2025 13:48:2 [SERVER-NAME] info: Mail send successfully
+Sat Aug 02 2025 13:48:47 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 203.593 ms
+Sat Aug 02 2025 13:48:50 [SERVER-NAME] info: Mail send successfully
+Sat Aug 02 2025 13:53:7 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 210.809 ms
+Sat Aug 02 2025 13:53:10 [SERVER-NAME] info: Mail send successfully
+Sat Aug 02 2025 13:53:30 [SERVER-NAME] info: ::1 - POST /api/v1/auth/verify-email 200 - 111.574 ms
+Sat Aug 02 2025 13:54:58 [SERVER-NAME] info: ::1 - POST /api/v1/auth/register 200 - 196.465 ms
+Sat Aug 02 2025 13:55:1 [SERVER-NAME] info: Mail send successfully

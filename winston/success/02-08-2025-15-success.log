@@ -1,0 +1,92 @@
+Sat Aug 02 2025 15:1:10 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/admin/drivers/suspend/688dd1d6cb1c9abf6b7294f7 200 - 116.843 ms
+Sat Aug 02 2025 15:1:22 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/admin/drivers/approve/688dd1d6cb1c9abf6b7294f7 200 - 104.204 ms
+Sat Aug 02 2025 15:3:32 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/availability 200 - 136.807 ms
+Sat Aug 02 2025 15:3:41 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/availability 200 - 96.307 ms
+Sat Aug 02 2025 15:10:35 [SERVER-NAME] info: ::1 - GET /api/v1/driver/rides 200 - 112.119 ms
+Sat Aug 02 2025 15:13:18 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:13:19 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:13:25 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:13:26 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:13:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:13:46 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:13:54 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:13:55 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:14:13 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:14:13 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:14:56 [SERVER-NAME] info: ::1 - GET /api/v1/driver/profile 200 - 145.398 ms
+Sat Aug 02 2025 15:15:47 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:15:48 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:15:52 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:15:52 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:16:4 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:16:4 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:16:36 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:16:36 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:16:39 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:16:40 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:16:50 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:16:51 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:17:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:17:46 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:17:48 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:17:49 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:17:53 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:17:53 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:18:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:18:11 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:18:17 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:18:18 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:20:17 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:20:17 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:21:1 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:21:1 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:21:26 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:21:27 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:24:3 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:24:4 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:24:22 [SERVER-NAME] info: ::1 - GET /api/v1/driver/profile 200 - 127.480 ms
+Sat Aug 02 2025 15:24:59 [SERVER-NAME] info: ::1 - GET /api/v1/driver/earnings 200 - 306.133 ms
+Sat Aug 02 2025 15:31:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:31:12 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:31:20 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:31:20 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:31:38 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:31:38 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:33:16 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:33:16 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:33:19 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:33:19 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:34:0 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:34:0 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:39:11 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:39:11 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:39:22 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:39:22 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:39:43 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:39:44 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:39:46 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:39:47 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:43:41 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:43:42 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:43:48 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:43:48 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:44:5 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:44:5 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:44:8 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:44:8 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:54:3 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:54:6 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:54:6 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:54:50 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:54:51 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:54:54 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:54:55 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:55:25 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:55:27 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:55:28 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:58:21 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:58:22 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:59:16 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:59:17 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 15:59:43 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 15:59:47 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m

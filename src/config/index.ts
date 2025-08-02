@@ -23,4 +23,5 @@ export default {
     email: process.env.SUPER_ADMIN_EMAIL,
     password: process.env.SUPER_ADMIN_PASSWORD,
   },
+  google_maps_api_key: process.env.GOOGLE_MAPS_API_KEY,
 };

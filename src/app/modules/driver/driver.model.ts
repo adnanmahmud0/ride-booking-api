@@ -1,31 +1,41 @@
+// driver.model.ts
+
 import { Schema, model } from 'mongoose';
-import { IDriver } from './driver.interface';
+import { USER_ROLES } from '../../../enums/user';
 
-const carSchema = new Schema(
-  {
-    model: { type: String, required: true },
-    licensePlate: { type: String, required: true },
-    color: { type: String, required: true },
-    year: { type: Number, required: true },
-  },
-  { _id: false }
-);
-
-const driverInfoSchema = new Schema(
-  {
-    licenseNumber: { type: String, required: true },
-    experienceYears: { type: Number, required: true, min: 0 },
-  },
-  { _id: false }
-);
+interface IDriver {
+  userId: Schema.Types.ObjectId;
+  car: {
+    make: string;
+    model: string;
+    year: number;
+    licensePlate: string;
+  };
+  driverInfo: {
+    licenseNumber: string;
+    licenseImage?: string;
+  };
+  isApproved: boolean;
+  availability: 'online' | 'offline';
+}
 
 const driverSchema = new Schema<IDriver>(
   {
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
       unique: true,
+    },
+    car: {
+      make: { type: String, required: true },
+      model: { type: String, required: true },
+      year: { type: Number, required: true },
+      licensePlate: { type: String, required: true },
+    },
+    driverInfo: {
+      licenseNumber: { type: String, required: true },
+      licenseImage: { type: String },
     },
     isApproved: {
       type: Boolean,
@@ -36,8 +46,6 @@ const driverSchema = new Schema<IDriver>(
       enum: ['online', 'offline'],
       default: 'offline',
     },
-    car: { type: carSchema, required: true },
-    driverInfo: { type: driverInfoSchema, required: true },
   },
   { timestamps: true }
 );

@@ -1,21 +1,25 @@
-import { Types } from 'mongoose';
+// src/app/modules/rider/rider.interface.ts
 
-export type ICar = {
-  model: string;
-  licensePlate: string;
-  color: string;
-  year: number;
-};
+export interface ICoordinate {
+  type: 'Point';
+  coordinates: [number, number]; // [longitude, latitude]
+}
 
-export type IDriverInfo = {
-  licenseNumber: string;
-  experienceYears: number;
-};
-
-export type IDriver = {
-  user: Types.ObjectId;
-  isApproved: boolean;
-  availability: 'online' | 'offline';
-  car: ICar;
-  driverInfo: IDriverInfo;
-};
+export interface IRide {
+  _id: string;
+  rider: string;
+  driver?: string;
+  pickupLocation: ICoordinate;
+  destinationLocation: ICoordinate;
+  fare?: number;
+  status: 'requested' | 'accepted' | 'picked_up' | 'in_transit' | 'completed' | 'cancelled';
+  timestamps?: {
+    requestedAt?: Date;
+    acceptedAt?: Date;
+    pickedUpAt?: Date;
+    inTransitAt?: Date;
+    completedAt?: Date;
+    cancelledAt?: Date;
+  };
+  distance?: number;
+}

@@ -1,9 +1,12 @@
+// rider.interface.ts
+
 import { Types } from 'mongoose';
 
 export interface ICoordinate {
   type: 'Point';
   coordinates: [number, number]; // [longitude, latitude]
 }
+
 
 export type IRideStatus =
   | 'requested'
@@ -31,6 +34,7 @@ export interface IRide {
     completedAt?: Date;
     cancelledAt?: Date;
   };
+  distance?: number; // in kilometers
 }
 
 export interface PaginationQuery {

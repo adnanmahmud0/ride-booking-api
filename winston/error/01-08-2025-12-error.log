@@ -1,5 +1,0 @@
-Fri Aug 01 2025 12:0:43 [SERVER-NAME] error: ::1 - GET /favicon.ico 404 - 1.938 ms
-Fri Aug 01 2025 12:1:52 [SERVER-NAME] error: ::1 - GET /favicon.ico 404 - 2.865 ms
-Fri Aug 01 2025 12:51:22 [SERVER-NAME] error: ::1 - POST /api/v1/auth/login 400 - 204.297 ms
-Fri Aug 01 2025 12:53:28 [SERVER-NAME] error: ::1 - POST /api/v1/rider/request 401 - 5.853 ms
-Fri Aug 01 2025 12:54:26 [SERVER-NAME] error: ::1 - GET /api/v1/user/profile 401 - 4.450 ms

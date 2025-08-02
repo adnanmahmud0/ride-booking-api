@@ -1,3 +1,5 @@
+// user.model.ts
+
 import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
 import { model, Schema } from 'mongoose';

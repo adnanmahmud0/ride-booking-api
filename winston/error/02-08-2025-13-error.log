@@ -1,0 +1,6 @@
+Sat Aug 02 2025 13:44:39 [SERVER-NAME] error: ::1 - POST /api/v1/auth/register 400 - 193.628 ms
+Sat Aug 02 2025 13:51:35 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 73.403 ms
+Sat Aug 02 2025 13:51:46 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 48.168 ms
+Sat Aug 02 2025 13:52:10 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 45.352 ms
+Sat Aug 02 2025 13:53:55 [SERVER-NAME] error: ::1 - POST /api/v1/auth/verify-email 400 - 44.441 ms
+Sat Aug 02 2025 13:54:27 [SERVER-NAME] error: ::1 - POST /api/v1/auth/register 400 - 72.114 ms
