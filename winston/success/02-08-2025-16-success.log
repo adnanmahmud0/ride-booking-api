@@ -52,3 +52,17 @@ Sat Aug 02 2025 16:23:14 [SERVER-NAME] info: [33m♻️ Application listening o
 Sat Aug 02 2025 16:23:35 [SERVER-NAME] info: ::1 - POST /api/v1/rider/request 200 - 388.355 ms
 Sat Aug 02 2025 16:27:34 [SERVER-NAME] info: ::1 - PATCH /api/v1/rider/688de727d9f25cd23e8d1974/cancel 200 - 186.035 ms
 Sat Aug 02 2025 16:28:33 [SERVER-NAME] info: ::1 - POST /api/v1/rider/request 200 - 116.995 ms
+Sat Aug 02 2025 16:30:45 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 16:30:45 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 16:31:2 [SERVER-NAME] info: ::1 - GET /api/v1/rider/all-rides 200 - 172.128 ms
+Sat Aug 02 2025 16:33:32 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/rides/688de851d9f25cd23e8d197a/accept 200 - 206.300 ms
+Sat Aug 02 2025 16:34:51 [SERVER-NAME] info: ::1 - PATCH /api/v1/driver/rides/688de851d9f25cd23e8d197a/status 200 - 103.525 ms
+Sat Aug 02 2025 16:35:6 [SERVER-NAME] info: ::1 - POST /api/v1/rider/688de851d9f25cd23e8d197a/pay 200 - 98.905 ms
+Sat Aug 02 2025 16:35:28 [SERVER-NAME] info: ::1 - GET /api/v1/driver/earnings 200 - 144.458 ms
+Sat Aug 02 2025 16:35:56 [SERVER-NAME] info: ::1 - GET /api/v1/rider/all-rides 200 - 189.474 ms
+Sat Aug 02 2025 16:37:22 [SERVER-NAME] info: ::1 - GET /api/v1/rider/admin/rides 200 - 104.409 ms
+Sat Aug 02 2025 16:38:54 [SERVER-NAME] info: ::1 - GET / 200 - 3.796 ms
+Sat Aug 02 2025 16:49:40 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 16:49:40 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
+Sat Aug 02 2025 16:49:58 [SERVER-NAME] info: [32m🚀 Database connected successfully[39m
+Sat Aug 02 2025 16:49:59 [SERVER-NAME] info: [33m♻️ Application listening on port:9000[39m
