@@ -1,4 +1,3 @@
-Here is a comprehensive and professional `README.md` for your **Ride Booking API** project:
 
 ---
 
@@ -6,24 +5,23 @@ Here is a comprehensive and professional `README.md` for your **Ride Booking API
 
 ## 🎯 Project Overview
 
-A secure, scalable, and modular backend **REST API** built with **Express.js**, **Mongoose**, and **TypeScript** for a **ride booking system** similar to Uber or Pathao.
+The **Ride Booking API** is a fully featured, secure, and scalable backend system inspired by ride-sharing platforms like **Uber** or **Pathao**.
 
-Supports role-based access control for **Admins**, **Riders**, and **Drivers**, covering everything from ride lifecycle management to driver approval workflows and user account control.
+Built using **Express.js**, **Mongoose**, and **TypeScript**, it supports role-based access control for:
+
+* 🧍 Riders: Request/cancel rides and track history
+* 🚗 Drivers: Accept, update, and complete rides
+* 🛡 Admins: Manage users, approve drivers, and oversee the system
 
 ---
 
 ## 📚 Table of Contents
 
 * [Features](#-features)
-* [API Base URL](#-api-base-url)
+* [Live Server](#-live-server)
 * [Installation](#-installation)
 * [Usage](#-usage)
 * [API Endpoints](#-api-endpoints)
-
-  * [Auth](#auth)
-  * [User (Admin)](#user-admin)
-  * [Rider](#rider)
-  * [Driver](#driver)
 * [Project Structure](#-project-structure)
 * [Environment Variables](#-environment-variables)
 * [Example Requests](#-example-requests)
@@ -35,22 +33,24 @@ Supports role-based access control for **Admins**, **Riders**, and **Drivers**, 
 
 ## ✨ Features
 
-* 🔐 JWT-based authentication with `admin`, `rider`, and `driver` roles
-* 🔒 Role-based route protection and middleware
-* 🧍 Rider functionality: ride request, cancel, ride history
-* 🚕 Driver functionality: accept/reject rides, set status, update ride, view earnings
-* 🛡 Admin panel: manage users, approve/suspend drivers, system settings
-* 📦 Modular codebase with validation, logging, and error handling
-* 📜 Full ride lifecycle tracking and status transitions
-* 🧠 Built-in logic for user blocks, driver approval, and ride cancellation rules
+* ✅ **JWT Authentication** (Admin, Rider, Driver)
+* ✅ **Secure Password Hashing** with Bcrypt
+* ✅ **Role-Based Access Control Middleware**
+* ✅ **Ride Lifecycle**: Request → Accept → Pickup → Transit → Complete
+* ✅ **Driver Availability & Earnings Tracking**
+* ✅ **User Management** (block/unblock, approve/suspend drivers)
+* ✅ **Ride History & Status Logging**
+* ✅ **Clean Modular Architecture** with Scalability in Mind
 
 ---
 
-## 🌍 API Base URL
+## 🌐 Live Server
 
-```
-https://ride-booking-api.onrender.com/api/v1
-```
+* **API Base URL**:
+  `https://ride-booking-api.onrender.com/api/v1`
+
+* **Test Endpoint**:
+  `https://ride-booking-api.onrender.com/`
 
 ---
 
@@ -63,26 +63,26 @@ npm install
 npm run dev
 ```
 
-> Requires Node.js ≥ 16.x and MongoDB
+> ✅ Node.js ≥ 16.x and MongoDB required
 
 ---
 
 ## 🚀 Usage
 
-Run the development server:
+Start development server:
 
 ```bash
 npm run dev
 ```
 
-Build and start production:
+Production build:
 
 ```bash
 npm run build
 npm start
 ```
 
-Linting and formatting:
+Code linting and formatting:
 
 ```bash
 npm run lint:check
@@ -93,59 +93,58 @@ npm run prettier:check
 
 ## 🔗 API Endpoints
 
-### ✅ Auth
+### 🔐 Auth
 
-| Method | Endpoint                | Description                 |
-| ------ | ----------------------- | --------------------------- |
-| POST   | `/auth/register`        | Register user               |
-| POST   | `/auth/verify-email`    | Email verification          |
-| POST   | `/auth/login`           | Login with role-based token |
-| POST   | `/auth/forget-password` | Request password reset      |
-| POST   | `/auth/change-password` | Change password             |
+| Method | Endpoint                |
+| ------ | ----------------------- |
+| POST   | `/auth/register`        |
+| POST   | `/auth/verify-email`    |
+| POST   | `/auth/login`           |
+| POST   | `/auth/forget-password` |
+| POST   | `/auth/change-password` |
 
 ---
 
 ### 👤 User (Admin)
 
-| Method | Endpoint                        | Description              |
-| ------ | ------------------------------- | ------------------------ |
-| GET    | `/user/profile`                 | Get current user profile |
-| GET    | `/user/admin/users`             | View all users           |
-| PATCH  | `/user/admin/users/block/:id`   | Block a user             |
-| PATCH  | `/user/admin/users/unblock/:id` | Unblock a user           |
-| GET    | `/user/admin/users/:id`         | Get user by ID           |
-| GET    | `/user/admin/system/settings`   | System settings (view)   |
-| PATCH  | `/user/admin/system/settings`   | Update settings          |
+| Method      | Endpoint                        |
+| ----------- | ------------------------------- |
+| GET         | `/user/profile`                 |
+| GET         | `/user/admin/users`             |
+| PATCH       | `/user/admin/users/block/:id`   |
+| PATCH       | `/user/admin/users/unblock/:id` |
+| GET         | `/user/admin/users/:id`         |
+| GET / PATCH | `/user/admin/system/settings`   |
 
 ---
 
 ### 🧍 Rider
 
-| Method | Endpoint             | Description             |
-| ------ | -------------------- | ----------------------- |
-| POST   | `/rider/request`     | Request a ride          |
-| PATCH  | `/rider/:id/cancel`  | Cancel a ride           |
-| PATCH  | `/rider/:id/pay`     | Pay for ride            |
-| GET    | `/rider/all-rides`   | Rider's ride history    |
-| GET    | `/rider/admin/rides` | Admin view of all rides |
+| Method | Endpoint             |
+| ------ | -------------------- |
+| POST   | `/rider/request`     |
+| PATCH  | `/rider/:id/cancel`  |
+| PATCH  | `/rider/:id/pay`     |
+| GET    | `/rider/all-rides`   |
+| GET    | `/rider/admin/rides` |
 
 ---
 
 ### 🚗 Driver
 
-| Method | Endpoint                            | Description             |
-| ------ | ----------------------------------- | ----------------------- |
-| POST   | `/driver/create-profile`            | Driver profile creation |
-| PATCH  | `/driver/update-profile`            | Update profile          |
-| PATCH  | `/driver/admin/drivers/approve/:id` | Approve driver          |
-| PATCH  | `/driver/admin/drivers/suspend/:id` | Suspend driver          |
-| PATCH  | `/driver/availability`              | Set online/offline      |
-| PATCH  | `/driver/rides/:id/accept`          | Accept ride             |
-| PATCH  | `/driver/rides/:id/reject`          | Reject ride             |
-| PATCH  | `/driver/rides/:id/status`          | Update ride status      |
-| GET    | `/driver/rides`                     | View assigned rides     |
-| GET    | `/driver/profile`                   | View driver profile     |
-| GET    | `/driver/earnings`                  | View earnings history   |
+| Method | Endpoint                            |
+| ------ | ----------------------------------- |
+| POST   | `/driver/create-profile`            |
+| PATCH  | `/driver/update-profile`            |
+| PATCH  | `/driver/admin/drivers/approve/:id` |
+| PATCH  | `/driver/admin/drivers/suspend/:id` |
+| PATCH  | `/driver/availability`              |
+| PATCH  | `/driver/rides/:id/accept`          |
+| PATCH  | `/driver/rides/:id/reject`          |
+| PATCH  | `/driver/rides/:id/status`          |
+| GET    | `/driver/rides`                     |
+| GET    | `/driver/profile`                   |
+| GET    | `/driver/earnings`                  |
 
 ---
 
@@ -153,23 +152,36 @@ npm run prettier:check
 
 ```
 src/
-├── modules/
-│   ├── auth/          # Auth logic & controllers
-│   ├── user/          # Admin and user management
-│   ├── driver/        # Driver workflows and profiles
-│   ├── rider/         # Rider actions and ride logic
-├── middlewares/       # Role guards, error handlers
-├── config/            # Env, DB, logging
-├── utils/             # Helpers, validators
-├── app.ts             # App setup
-├── server.ts          # App entry point
+├── app/
+│   ├── builder/             # App builder & bootstrapping
+│   ├── middlewares/         # Global middlewares
+│   └── modules/             # Main feature modules
+│       ├── auth/            # Auth and JWT logic
+│       ├── driver/          # Driver workflows
+│       ├── resetToken/      # Password reset token handling
+│       ├── rider/           # Rider actions and rides
+│       ├── systemsettings/  # Admin system configs
+│       └── user/            # User & admin management
+├── bd/                      # Database initialization/config
+├── config/                  # Environment and app config
+├── enums/                   # Application-wide enums
+├── errors/                  # Custom error classes
+├── helpers/                 # Helper utilities
+├── middlewares/             # Role guards, error handling, auth checks
+├── routes/                  # API routing logic
+├── scripts/                 # Seeders or CLI tools
+├── shared/                  # DTOs, shared constants
+├── types/                   # Custom types and interfaces
+├── util/                    # Utility functions, logging, formatting
+├── app.ts                   # Express app instance
+└── server.ts                # App entry point
 ```
 
 ---
 
 ## ⚙️ Environment Variables
 
-Create a `.env` file:
+`.env` file:
 
 ```env
 PORT=5000
@@ -188,18 +200,21 @@ SUPER_ADMIN_PASSWORD=supersecurepassword
 
 ```http
 POST /api/v1/auth/register
+Content-Type: application/json
+
 {
   "email": "rider@example.com",
-  "password": "pass123",
+  "password": "rider123",
   "role": "rider"
 }
 ```
 
-### Request Ride
+### Request a Ride (Rider)
 
 ```http
 POST /api/v1/rider/request
-Authorization: Bearer <token>
+Authorization: Bearer <JWT>
+
 {
   "pickupLocation": { "lat": 23.8103, "lng": 90.4125 },
   "destinationLocation": { "lat": 23.7500, "lng": 90.3600 }
@@ -210,37 +225,32 @@ Authorization: Bearer <token>
 
 ## 🧪 Testing & Documentation
 
-* ✅ Use [Postman](https://www.postman.com/) to test endpoints
-* ✅ Document response codes and edge cases
-* ✅ Record a **5–10 min** walkthrough video covering:
-
-  * Project intro
-  * Folder structure
-  * Auth and roles
-  * Core ride workflows
-  * Admin controls
-  * Postman demonstration
+* ✅ Tested thoroughly with **Postman**
+* ✅ Endpoints return meaningful error codes and messages
+* ✅ Recommended: Screen-recorded demo (\~5–10 mins)
 
 ---
 
 ## 🛠 Troubleshooting
 
-* **CORS issues?** Enable it in Express middleware.
-* **MongoDB errors?** Ensure local/Atlas DB is connected and accessible.
-* **Token expired?** Regenerate by re-logging in.
+| Problem                | Solution                                      |
+| ---------------------- | --------------------------------------------- |
+| MongoDB not connecting | Check your `MONGODB_URI` and DB status        |
+| JWT expired            | Re-login to generate a new token              |
+| Role denied            | Ensure you use correct Bearer token & headers |
+| CORS error             | Enable CORS in Express config                 |
 
 ---
 
 ## 👨‍💻 Contributors
 
-* \[Your Name] - Developer, System Architect
+* **Your Name** – Backend Developer
 
 ---
 
 ## 🪪 License
 
-This project is licensed under the **ISC License**.
+Licensed under the **ISC License**.
 
 ---
 
-Would you like me to generate the Postman collection, OpenAPI (Swagger) YAML, or the script to create the super admin account automatically?
